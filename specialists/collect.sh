@@ -161,13 +161,14 @@ if docker_available; then
   # health (if any), uptime_s, restart_count.
   CONTAINER_ROWS=$(docker ps -a --format '{{.ID}}' 2>/dev/null | while read -r CID; do
     [ -z "$CID" ] && continue
-    INSPECT=$(docker inspect "$CID" 2>/dev/null) || continue
-    # Pull the fields we want with awk-ish jq alternatives. We don't
-    # require jq; awk-grep does the job for the small subset.
-    NAME=$(echo "$INSPECT" | grep -m1 '"Name"' | head -1 | sed 's/.*"Name": "\/\(.*\)",/\1/')
-    IMAGE=$(echo "$INSPECT" | grep -m1 '"Image": "' | head -1 | sed 's/.*"Image": "\(.*\)",/\1/')
-    STATE=$(echo "$INSPECT" | grep -m1 '"Status": "' | head -1 | sed 's/.*"Status": "\(.*\)",/\1/')
-    HEALTH=$(echo "$INSPECT" | grep -m1 '"Status": "' | grep -A0 '' || true)
+    # Direct-extract every field via docker's --format flag. Prior
+    # versions of this loop parsed docker inspect's JSON output with
+    # grep+sed, which broke whenever a field's formatting changed
+    # (e.g. multi-line value, missing trailing comma, Status field
+    # appearing inside an unexpected sub-object). --format is robust.
+    NAME=$(docker inspect --format '{{.Name}}' "$CID" 2>/dev/null | sed 's|^/||')
+    IMAGE=$(docker inspect --format '{{.Image}}' "$CID" 2>/dev/null)
+    STATE=$(docker inspect --format '{{.State.Status}}' "$CID" 2>/dev/null)
     HEALTH_STR=$(docker inspect --format '{{if .State.Health}}{{.State.Health.Status}}{{else}}none{{end}}' "$CID" 2>/dev/null)
     RESTARTS=$(docker inspect --format '{{.RestartCount}}' "$CID" 2>/dev/null)
     STARTED=$(docker inspect --format '{{.State.StartedAt}}' "$CID" 2>/dev/null)
