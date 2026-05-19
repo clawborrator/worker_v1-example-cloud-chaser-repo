@@ -160,8 +160,10 @@ if docker_available; then
     RESTARTS=$(docker inspect --format '{{.RestartCount}}' "$CID" 2>/dev/null)
     STARTED=$(docker inspect --format '{{.State.StartedAt}}' "$CID" 2>/dev/null)
     EXIT_CODE=$(docker inspect --format '{{.State.ExitCode}}' "$CID" 2>/dev/null)
-    # Recent error lines (last 100 log lines, grep'd).
-    ERR_COUNT=$(docker logs --tail 100 "$CID" 2>&1 | grep -ciE 'error|fatal|panic|fail' || echo 0)
+    # Recent error lines (last 100 log lines, grep'd). grep -c
+    # emits the count even when zero, and exits 1 on no matches;
+    # swallow the exit code so the count is the only output.
+    ERR_COUNT=$(docker logs --tail 100 "$CID" 2>&1 | { grep -ciE 'error|fatal|panic|fail' || true; })
     # JSON-escape name + image.
     NAME_J=$(printf '%s' "$NAME" | sed 's/"/\\"/g')
     IMG_J=$(printf '%s' "$IMAGE" | sed 's/"/\\"/g')
