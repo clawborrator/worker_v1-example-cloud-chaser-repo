@@ -1,0 +1,224 @@
+{
+  "ts": "2026-05-19T10:00:25Z",
+  "hostname": "mriiot-022",
+  "kernel_host": "mriiot-022",
+  "uptime_s": 2148139,
+  "load": {
+    "1m": 1.84,
+    "5m": 0.92,
+    "15m": 0.51
+  },
+  "cpu": {
+    "ncores": 4,
+    "pct": 17.2
+  },
+  "mem": {
+    "total_mb": 3967,
+    "used_mb": 1924,
+    "pct": 48.5
+  },
+  "disks": [
+    {
+      "mount": "/etc/hosts",
+      "size_mb": 28046,
+      "used_mb": 17047,
+      "pct": 60
+    }
+  ],
+  "kernel_errors_last_hour": [],
+  "docker": {
+    "available": true,
+    "containers": [
+      {
+        "id": "8cc1101cb389",
+        "name": "cloud-chaser-mriiot-022",
+        "image": "sha256:f8a512efea8c5f573306d1c668322d706cc20d4d5b1f349cb674d72c1a112a3e",
+        "state": "running",
+        "health": "none",
+        "restart_count": 0,
+        "started_at": "2026-05-19T09:59:54.157206161Z",
+        "exit_code": 0,
+        "err_lines_last_100": 0,
+        "err_samples": []
+      },
+      {
+        "id": "ff70c1998b92",
+        "name": "royalmaster-staging-customer-portal-1",
+        "image": "sha256:1cfb982b57c6a887e416dda8478f865e06460a4ae893fe3cf0faa91e4ede8175",
+        "state": "running",
+        "health": "healthy",
+        "restart_count": 0,
+        "started_at": "2026-05-15T09:13:21.629550964Z",
+        "exit_code": 0,
+        "err_lines_last_100": 1,
+        "err_samples": [
+          "2026-05-15T09:13:22.611449Z  INFO static_web_server::info: log level: error"
+        ]
+      },
+      {
+        "id": "a77b2bb864d1",
+        "name": "royalmaster-staging-technician-portal-1",
+        "image": "sha256:c807e65c2dce76e15e8b4880a0211da57bb2b6038e563edd0d6bf3047e7106a2",
+        "state": "running",
+        "health": "healthy",
+        "restart_count": 0,
+        "started_at": "2026-05-15T09:13:21.650739979Z",
+        "exit_code": 0,
+        "err_lines_last_100": 1,
+        "err_samples": [
+          "2026-05-15T09:13:22.814800Z  INFO static_web_server::info: log level: error"
+        ]
+      },
+      {
+        "id": "12cec189caf8",
+        "name": "royalmaster-staging-historical-entry-frontend-1",
+        "image": "sha256:63262ee7994e7dc4fbd3e9ca5ccb7b97a2f092f913f83c452f5a2a861d374228",
+        "state": "running",
+        "health": "healthy",
+        "restart_count": 0,
+        "started_at": "2026-05-15T09:13:20.765588859Z",
+        "exit_code": 0,
+        "err_lines_last_100": 1,
+        "err_samples": [
+          "2026-05-15T09:13:21.073544Z  INFO static_web_server::info: log level: error"
+        ]
+      },
+      {
+        "id": "0b3c0bea592e",
+        "name": "royalmaster-staging-portal-backend-1",
+        "image": "sha256:88139d7b989a9266cf40e5124f2d2f1a46e204e48db13062eef1975e37dfb55b",
+        "state": "running",
+        "health": "none",
+        "restart_count": 0,
+        "started_at": "2026-05-15T09:13:21.079901214Z",
+        "exit_code": 0,
+        "err_lines_last_100": 0,
+        "err_samples": []
+      },
+      {
+        "id": "b80163c4f112",
+        "name": "royalmaster-staging-rag-ingestion-api-1",
+        "image": "sha256:baef6142594d4a379358ecd47df6a0e60d1d6cf3a3d37680d3c37bc3409721f6",
+        "state": "running",
+        "health": "none",
+        "restart_count": 0,
+        "started_at": "2026-05-15T09:13:21.077731329Z",
+        "exit_code": 0,
+        "err_lines_last_100": 0,
+        "err_samples": []
+      },
+      {
+        "id": "bc4159579e22",
+        "name": "royalmaster-staging-rag-ingestion-worker-1",
+        "image": "sha256:baef6142594d4a379358ecd47df6a0e60d1d6cf3a3d37680d3c37bc3409721f6",
+        "state": "running",
+        "health": "none",
+        "restart_count": 0,
+        "started_at": "2026-05-15T09:13:21.069760602Z",
+        "exit_code": 0,
+        "err_lines_last_100": 0,
+        "err_samples": []
+      },
+      {
+        "id": "435662aa8d89",
+        "name": "royalmaster-staging-rag-retrieval-1",
+        "image": "sha256:e98fe2619ef9936f82362c52b5350d0b2cb3729761015f2d8bd273d3d449153f",
+        "state": "running",
+        "health": "none",
+        "restart_count": 0,
+        "started_at": "2026-05-15T09:13:21.078655447Z",
+        "exit_code": 0,
+        "err_lines_last_100": 0,
+        "err_samples": []
+      },
+      {
+        "id": "4daa4d07af29",
+        "name": "royalmaster-staging-historical-entry-backend-1",
+        "image": "sha256:f1b9bb651646dab43775891e2666102f86004c757072a8ef7c3239c350930b6b",
+        "state": "running",
+        "health": "none",
+        "restart_count": 0,
+        "started_at": "2026-05-15T09:13:20.536595875Z",
+        "exit_code": 0,
+        "err_lines_last_100": 0,
+        "err_samples": []
+      },
+      {
+        "id": "9e7ff0a66174",
+        "name": "royalmaster-staging-rag-generation-1",
+        "image": "sha256:4976a51f66cdb0ab1820120408c297b2ef7cdea67f9135fc86f278986a9619ae",
+        "state": "running",
+        "health": "none",
+        "restart_count": 0,
+        "started_at": "2026-05-15T09:13:20.535852745Z",
+        "exit_code": 0,
+        "err_lines_last_100": 0,
+        "err_samples": []
+      },
+      {
+        "id": "48674297528f",
+        "name": "royalmaster-staging-postgres-1",
+        "image": "sha256:890480b08124ce7f79960a9bb16fe39729aa302bd384bfd7c408fee6c8f7adb7",
+        "state": "running",
+        "health": "healthy",
+        "restart_count": 0,
+        "started_at": "2026-05-14T23:30:08.057100536Z",
+        "exit_code": 0,
+        "err_lines_last_100": 0,
+        "err_samples": []
+      },
+      {
+        "id": "ccaf91d144f3",
+        "name": "royalmaster-staging-mongo-1",
+        "image": "sha256:6fa660675b272b56258de5d2bcb1459c7783667008218783a27f13698efcbec5",
+        "state": "running",
+        "health": "healthy",
+        "restart_count": 0,
+        "started_at": "2026-05-14T09:07:14.586294955Z",
+        "exit_code": 0,
+        "err_lines_last_100": 0,
+        "err_samples": []
+      },
+      {
+        "id": "f8145e814a49",
+        "name": "royalmaster-staging-qdrant-1",
+        "image": "sha256:b3063c673f3973877c038eeecc392bad5011f072ee7892b56c9a8e204a3bdea9",
+        "state": "running",
+        "health": "healthy",
+        "restart_count": 0,
+        "started_at": "2026-05-12T07:01:38.513923098Z",
+        "exit_code": 0,
+        "err_lines_last_100": 0,
+        "err_samples": []
+      },
+      {
+        "id": "74d9f05bae5a",
+        "name": "royalmaster-staging-redis-1",
+        "image": "sha256:5d5154123426693540ea6c1d9e638eae2bf2024879c839db6fcfdd7717e817c7",
+        "state": "running",
+        "health": "healthy",
+        "restart_count": 0,
+        "started_at": "2026-05-12T07:01:38.508435688Z",
+        "exit_code": 0,
+        "err_lines_last_100": 0,
+        "err_samples": []
+      },
+      {
+        "id": "4e2742f8495b",
+        "name": "royalmaster-staging-dozzle-1",
+        "image": "sha256:1cc972250626553009ddacbdf1f5725b681cdcbabe551fec69cd728882ffbc58",
+        "state": "running",
+        "health": "none",
+        "restart_count": 0,
+        "started_at": "2026-05-12T07:01:38.504194695Z",
+        "exit_code": 0,
+        "err_lines_last_100": 1,
+        "err_samples": [
+          "{\"level\":\"error\",\"version\":\"v10.5.3\",\"host\":\"mriiot-022\",\"time\":\"2026-05-13T15:44:44Z\",\"message\":\"unexpected error while listening to docker events\"}"
+        ]
+      }
+    ]
+  },
+  "overall_health": "green",
+  "summary": "all 15 containers healthy; disk 60%; load 1.84"
+}
