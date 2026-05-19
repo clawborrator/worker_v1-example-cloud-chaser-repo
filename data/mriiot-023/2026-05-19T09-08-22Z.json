@@ -1,0 +1,13 @@
+{
+  "ts": "2026-05-19T09:08:22Z",
+  "hostname": "mriiot-023",
+  "kernel_host": "mriiot-023",
+  "uptime_s": 192894,
+  "load": { "1m": 0.52, "5m": 0.17, "15m": 0.05 },
+  "cpu": { "ncores": 2, "pct": 28.3 },
+  "mem": { "total_mb": 3968, "used_mb": 2018, "pct": 50.9 },
+  "disks": [{"mount":"/etc/hosts","size_mb":28046,"used_mb":14255,"pct":50}],
+  "kernel_errors_last_hour": [],
+  "docker": {"available":true,"containers":[{"id":"7e818cb95235","name":"cloud-chaser-mriiot-023","image":"sha256:f8a512efea8c5f573306d1c668322d706cc20d4d5b1f349cb674d72c1a112a3e","state":"running","health":"none","restart_count":0,"started_at":"2026-05-19T09:07:41.193205203Z","exit_code":0,"err_lines_last_100":0
+0},{"id":"6dcacadbed75","name":"reddit-engager","image":"sha256:fb70146826687bd3709d05fa0272627bfa2935a0eca7385aa5fa989bbc95d0b5","state":"running","health":"none","restart_count":0,"started_at":"2026-05-19T08:11:57.949320409Z","exit_code":0,"err_lines_last_100":4}]}
+}

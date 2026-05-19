@@ -1,0 +1,7 @@
+{
+  "ts": "2026-05-19T09:08:28Z",
+  "hostname": "mriiot-023",
+  "error": "collect_failed",
+  "overall_health": "red",
+  "summary": "collect.sh failed; system state unavailable"
+}
