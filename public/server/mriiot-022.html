@@ -2,50 +2,49 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>mriiot-022 — cloud-chaser</title>
 <link rel="stylesheet" href="../style.css">
 </head>
 <body>
 <header>
+  <p class="crumb"><a href="../index.html">← fleet</a></p>
   <h1>mriiot-022</h1>
-  <p class="generated">regenerated 2026-05-19T13:29:26.667Z</p>
-  <p><a href="../index.html">← fleet</a></p>
+  <p class="generated">regenerated 2026-05-19T13:42:49.651Z</p>
 </header>
 <main>
 
-<section>
-  <h2>now</h2>
-  <p>
-    <span class="badge" style="background:#3a9a4a">green</span>
-    16 containers running; disk 63%, mem 54%, load 0.58
-  </p>
-  <ul>
-    <li>cpu: 13.6% (4 cores)</li>
-    <li>mem: 54.2% (2152 / 3967 MB)</li>
-    <li>load: 0.58 / 0.4 / 0.39</li>
-    <li>uptime: 0h</li>
-    <li>kernel hostname: <code>mriiot-022</code></li>
-  </ul>
+<section class="now-card" style="--c:#3a9a4a">
+  <div class="now-head">
+    <span class="now-badge">green</span>
+    <span class="now-summary">all 15 containers running; disks 63%; mem 56%; load 0.6</span>
+  </div>
+  <div class="now-stats">
+    <div><span class="stat-label">cpu</span><span class="stat-val">21.9%</span><span class="stat-sub">4 cores</span></div>
+    <div><span class="stat-label">mem</span><span class="stat-val">56.4%</span><span class="stat-sub">2238 / 3967 MB</span></div>
+    <div><span class="stat-label">load 1m</span><span class="stat-val">0.63</span><span class="stat-sub">5m 0.34 · 15m 0.34</span></div>
+    <div><span class="stat-label">uptime</span><span class="stat-val">1h</span><span class="stat-sub">kernel <code>mriiot-022</code></span></div>
+  </div>
 </section>
 
 <section>
   <h2>history (7d, hourly)</h2>
-  <div class="history"><span class="tick" style="background:#3a9a4a" title="2026-05-19T10:00:25Z green"></span><span class="tick" style="background:#3a9a4a" title="2026-05-19T11:18:05Z green"></span><span class="tick" style="background:#c4881e" title="2026-05-19T12:05:52Z amber"></span><span class="tick" style="background:#3a9a4a" title="2026-05-19T12:23:35Z green"></span><span class="tick" style="background:#3a9a4a" title="2026-05-19T13:20:40Z green"></span></div>
+  <div class="history"><span class="tick" style="background:#3a9a4a" title="2026-05-19T10:00:25Z green"></span><span class="tick" style="background:#3a9a4a" title="2026-05-19T11:18:05Z green"></span><span class="tick" style="background:#c4881e" title="2026-05-19T12:05:52Z amber"></span><span class="tick" style="background:#3a9a4a" title="2026-05-19T12:23:35Z green"></span><span class="tick" style="background:#3a9a4a" title="2026-05-19T13:20:40Z green"></span><span class="tick" style="background:#3a9a4a" title="2026-05-19T13:42:25Z green"></span></div>
 </section>
 
 <section>
   <h2>disks</h2>
-  <table>
+  <div class="table-wrap"><table>
     <thead><tr><th>mount</th><th>size MB</th><th>used MB</th><th>%</th></tr></thead>
     <tbody>
-      <tr><td><code>/etc/hosts</code></td><td>28046</td><td>17811</td><td>63%</td></tr>
+      <tr><td><code>/etc/hosts</code></td><td>28046</td><td>17815</td><td>63%</td></tr>
     </tbody>
-  </table>
+  </table></div>
 </section>
 
 <section>
   <h2>containers</h2>
-  <table>
+  <div class="table-wrap"><table>
     <thead><tr><th>name</th><th>image</th><th>state</th><th>health</th><th>restarts</th><th>err lines (last 100)</th></tr></thead>
     <tbody>
       <tr><td><code>royalmaster-staging-technician-portal-1</code></td><td title="sha256:a014a5d206f77bb5f0e56bd031ff7829ab0a77b56caa3b4bad4d6e17005ec0b8">sha256:a014a5d206f77bb5f…</td><td>running</td><td>healthy</td><td>0</td><td>2</td></tr>
@@ -86,7 +85,7 @@ redis.exceptions.ConnectionError: Connection closed by server.
       <tr class="err-samples"><td colspan="6"><details><summary>2 error-like lines · showing last 2</summary><pre>{&quot;level&quot;:&quot;error&quot;,&quot;version&quot;:&quot;v10.5.3&quot;,&quot;host&quot;:&quot;mriiot-022&quot;,&quot;time&quot;:&quot;2026-05-13T15:44:44Z&quot;,&quot;message&quot;:&quot;unexpected error while listening to docker events&quot;}
 {&quot;level&quot;:&quot;error&quot;,&quot;version&quot;:&quot;v10.5.3&quot;,&quot;error&quot;:&quot;context deadline exceeded&quot;,&quot;time&quot;:&quot;2026-05-19T12:22:12Z&quot;,&quot;message&quot;:&quot;failed to shut down&quot;}</pre></details></td></tr>
     </tbody>
-  </table>
+  </table></div>
 </section>
 
 <section>
