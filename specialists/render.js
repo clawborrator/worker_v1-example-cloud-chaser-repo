@@ -173,10 +173,14 @@ ${disks.map(d => `      <tr><td><code>${escapeHtml(d.mount)}</code></td><td>${es
     <tbody>
 ${containers.map(c => {
         const samples = Array.isArray(c.err_samples) ? c.err_samples : [];
-        const sampleRow = samples.length
-          ? `\n      <tr class="err-samples"><td colspan="6"><details><summary>${escapeHtml(c.err_lines_last_100)} error-like lines · showing last ${samples.length}</summary><pre>${samples.map(escapeHtml).join('\n')}</pre></details></td></tr>`
-          : '';
-        return `      <tr><td><code>${escapeHtml(c.name)}</code></td><td title="${escapeHtml(c.image)}">${escapeHtml(c.image.length > 24 ? c.image.slice(0, 24) + '…' : c.image)}</td><td>${escapeHtml(c.state)}</td><td>${escapeHtml(c.health)}</td><td>${escapeHtml(c.restart_count)}</td><td>${escapeHtml(c.err_lines_last_100)}</td></tr>${sampleRow}`;
+        const count = c.err_lines_last_100 || 0;
+        let sampleRow = '';
+        if (samples.length) {
+          sampleRow = `\n      <tr class="err-samples"><td colspan="6"><details><summary>${escapeHtml(count)} error-like lines · showing last ${samples.length}</summary><pre>${samples.map(escapeHtml).join('\n')}</pre></details></td></tr>`;
+        } else if (count > 0) {
+          sampleRow = `\n      <tr class="err-samples"><td colspan="6"><em>${escapeHtml(count)} error-like lines matched, but all samples stripped to empty after cleanup (likely pure ANSI/TUI redraws — check container logs directly).</em></td></tr>`;
+        }
+        return `      <tr><td><code>${escapeHtml(c.name)}</code></td><td title="${escapeHtml(c.image)}">${escapeHtml(c.image.length > 24 ? c.image.slice(0, 24) + '…' : c.image)}</td><td>${escapeHtml(c.state)}</td><td>${escapeHtml(c.health)}</td><td>${escapeHtml(c.restart_count)}</td><td>${escapeHtml(count)}</td></tr>${sampleRow}`;
       }).join('\n')}
     </tbody>
   </table>`
