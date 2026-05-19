@@ -70,10 +70,18 @@ Each step is one or more tool calls. Bash subprocesses for the
 collection + git work; your turn for the scoring + summary; MCP
 for the notification.
 
-### Step 1 — Derive server identity (bash)
+### Step 1 — Self-update + derive server identity (bash)
 
 ```bash
 cd /workspace/repo
+
+# Self-update the specialists from the companion repo so fixes
+# to collect.sh / render.js / derive-name.sh roll out fleet-wide
+# without operator-touched container restarts. Failures (network
+# blip, mid-pull push collision) are non-fatal — we run with
+# whatever's currently on disk.
+git pull --ff-only origin main 2>&1 | tail -1 || echo "self-update: pull failed, continuing with current checkout"
+
 SERVER_NAME=$(bash specialists/derive-name.sh) || {
   echo "could not derive SERVER_NAME"
   exit 1
@@ -81,6 +89,13 @@ SERVER_NAME=$(bash specialists/derive-name.sh) || {
 export SERVER_NAME
 echo "SERVER_NAME=$SERVER_NAME"
 ```
+
+CLAUDE.md changes do NOT take effect via this pull — the agent
+holds the playbook in working memory across cron fires. To roll
+out a CLAUDE.md change, the operator restarts the container
+(`docker compose restart cloud-chaser`); the worker_v1 entrypoint
+pulls + reloads on boot. Specialist script changes DO take effect
+on the next cycle because they run as fresh subprocesses.
 
 `derive-name.sh` honours `SERVER_NAME_OVERRIDE` if set; otherwise
 it reads `/host/etc/hostname`, lowercases it, strips whitespace,
@@ -338,10 +353,10 @@ To add a second notification target (e.g. PagerDuty via a peer):
 ## TL;DR
 
 - Boot: install cron `0 * * * *`, run one warmup cycle, return.
-- Each fire: derive identity from kernel hostname (bash) →
-  collect (bash) → score (your turn) → prune (bash) → render
-  (bash) → commit + push (bash) → notify if amber/red (MCP) →
-  return.
+- Each fire: self-update specialists via `git pull --ff-only`
+  (bash) → derive identity from kernel hostname (bash) → collect
+  (bash) → score (your turn) → prune (bash) → render (bash) →
+  commit + push (bash) → notify if amber/red (MCP) → return.
 - Bash for system / docker / git / render. Your turn for judgment.
   MCP for notification.
 - Read-only observer. Never touches the host. Per-server folder
