@@ -12,3 +12,6 @@ code { background: #eee; padding: 0 0.3rem; border-radius: 2px; }
 pre { background: #1e1e1e; color: #eee; padding: 1rem; border-radius: 4px; overflow-x: auto; font-size: 0.8rem; }
 section { margin: 1.5rem 0; }
 table.fleet td.summary { max-width: 30rem; }
+tr.err-samples td { background: #fff8ec; }
+tr.err-samples summary { cursor: pointer; color: #8a5a00; font-size: 0.85rem; }
+tr.err-samples pre { margin-top: 0.5rem; max-height: 12rem; overflow-y: auto; font-size: 0.75rem; }
