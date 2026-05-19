@@ -64,45 +64,47 @@ function fmtAgo(iso) {
 
 function renderIndex(rows) {
   const ts = new Date().toISOString();
+  const counts = rows.reduce((acc, r) => {
+    acc[r.health] = (acc[r.health] || 0) + 1;
+    return acc;
+  }, {});
+  const summaryStrip = ['red', 'amber', 'green', 'unknown']
+    .filter(t => counts[t])
+    .map(t => `<span class="tier-pill" style="--c:${tierColor(t)}">${escapeHtml(counts[t])} ${escapeHtml(t)}</span>`)
+    .join('');
+
   return `<!doctype html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>cloud-chaser fleet</title>
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
 <header>
   <h1>cloud-chaser fleet</h1>
+  <div class="tier-strip">${summaryStrip || `<span class="tier-pill" style="--c:#888">no servers reporting yet</span>`}</div>
   <p class="generated">regenerated ${escapeHtml(ts)}</p>
 </header>
 <main>
-<table class="fleet">
-  <thead>
-    <tr>
-      <th>server</th>
-      <th>health</th>
-      <th>summary</th>
-      <th>cpu</th>
-      <th>mem</th>
-      <th>disks (max)</th>
-      <th>containers</th>
-      <th>last cycle</th>
-    </tr>
-  </thead>
-  <tbody>
-${rows.map(r => `    <tr>
-      <td><a href="server/${escapeHtml(r.server)}.html">${escapeHtml(r.server)}</a></td>
-      <td><span class="badge" style="background:${tierColor(r.health)}">${escapeHtml(r.health)}</span></td>
-      <td class="summary">${escapeHtml(r.summary)}</td>
-      <td>${escapeHtml(r.cpu)}%</td>
-      <td>${escapeHtml(r.mem)}%</td>
-      <td>${escapeHtml(r.diskMax)}%</td>
-      <td>${escapeHtml(r.containers)}</td>
-      <td title="${escapeHtml(r.ts)}">${escapeHtml(r.ago)}</td>
-    </tr>`).join('\n')}
-  </tbody>
-</table>
+<div class="card-grid">
+${rows.map(r => `  <a class="card" href="server/${escapeHtml(r.server)}.html" style="--c:${tierColor(r.health)}">
+    <div class="card-head">
+      <span class="card-server">${escapeHtml(r.server)}</span>
+      <span class="card-badge">${escapeHtml(r.health)}</span>
+    </div>
+    <div class="card-summary">${escapeHtml(r.summary) || '<em>no summary</em>'}</div>
+    <div class="card-stats">
+      <div><span class="stat-label">cpu</span><span class="stat-val">${escapeHtml(r.cpu)}%</span></div>
+      <div><span class="stat-label">mem</span><span class="stat-val">${escapeHtml(r.mem)}%</span></div>
+      <div><span class="stat-label">disk</span><span class="stat-val">${escapeHtml(r.diskMax)}%</span></div>
+      <div><span class="stat-label">containers</span><span class="stat-val">${escapeHtml(r.containers)}</span></div>
+    </div>
+    <div class="card-foot" title="${escapeHtml(r.ts)}">last cycle ${escapeHtml(r.ago)}</div>
+  </a>`).join('\n')}
+</div>
+${rows.length === 0 ? '<p class="empty"><em>No snapshots committed yet. First cycle on a new host lands within ~5 minutes of <code>docker compose up</code>.</em></p>' : ''}
 </main>
 </body>
 </html>
@@ -124,6 +126,7 @@ function renderServer(server, latest, history) {
 <html lang="en">
 <head>
 <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>${escapeHtml(server)} — cloud-chaser</title>
 <link rel="stylesheet" href="../style.css">
 </head>
@@ -200,23 +203,69 @@ ${containers.map(c => {
 `;
 }
 
-const STYLE = `body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; margin: 2rem; color: #222; background: #fafafa; }
-header h1 { margin-bottom: 0; }
-header .generated { color: #888; font-size: 0.85rem; margin-top: 0.2rem; }
+const STYLE = `* { box-sizing: border-box; }
+body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; margin: 0; padding: 1.25rem; color: #222; background: #fafafa; max-width: 1400px; }
+@media (min-width: 720px) { body { padding: 2rem; margin: 0 auto; } }
+
+header h1 { margin: 0 0 0.4rem; font-size: 1.4rem; }
+@media (min-width: 720px) { header h1 { font-size: 1.75rem; } }
+header .generated { color: #888; font-size: 0.8rem; margin: 0.3rem 0 0; }
+
+.tier-strip { display: flex; flex-wrap: wrap; gap: 0.4rem; margin: 0.4rem 0 0.2rem; }
+.tier-pill { display: inline-flex; align-items: center; padding: 0.2rem 0.6rem; border-radius: 999px; font-size: 0.8rem; font-weight: 600; color: white; background: var(--c, #888); text-transform: uppercase; letter-spacing: 0.02em; }
+
+/* Card grid — auto-fit columns, single column on narrow viewports. */
+.card-grid { display: grid; grid-template-columns: 1fr; gap: 0.75rem; margin-top: 1.25rem; }
+@media (min-width: 560px) { .card-grid { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem; } }
+
+.card {
+  display: block; text-decoration: none; color: inherit;
+  background: white; border-radius: 8px; padding: 0.9rem 1rem;
+  border-left: 4px solid var(--c, #888);
+  box-shadow: 0 1px 2px rgba(0,0,0,0.04), 0 1px 1px rgba(0,0,0,0.03);
+  transition: box-shadow 0.15s, transform 0.15s;
+}
+.card:hover, .card:focus-visible { box-shadow: 0 4px 12px rgba(0,0,0,0.08), 0 1px 2px rgba(0,0,0,0.04); transform: translateY(-1px); outline: none; }
+
+.card-head { display: flex; justify-content: space-between; align-items: center; gap: 0.5rem; margin-bottom: 0.3rem; }
+.card-server { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-weight: 600; font-size: 0.95rem; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.card-badge { display: inline-block; padding: 0.1rem 0.55rem; border-radius: 3px; color: white; font-weight: 600; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.03em; background: var(--c, #888); flex-shrink: 0; }
+
+.card-summary { font-size: 0.85rem; color: #555; line-height: 1.35; margin: 0.3rem 0 0.7rem; min-height: 1.1em; }
+.card-summary em { color: #999; font-style: italic; }
+
+.card-stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.4rem 0.6rem; margin: 0.5rem 0; }
+.card-stats > div { display: flex; flex-direction: column; min-width: 0; }
+.stat-label { font-size: 0.7rem; color: #888; text-transform: uppercase; letter-spacing: 0.04em; }
+.stat-val { font-size: 0.95rem; font-weight: 600; color: #222; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; }
+
+.card-foot { font-size: 0.75rem; color: #888; margin-top: 0.4rem; }
+
+.empty { color: #888; text-align: center; margin: 3rem 0; }
+
+/* === Per-server detail page (kept tabular, made mobile-tolerant). === */
 table { border-collapse: collapse; width: 100%; background: white; }
-th, td { border: 1px solid #ddd; padding: 0.4rem 0.6rem; text-align: left; vertical-align: top; }
+th, td { border: 1px solid #ddd; padding: 0.4rem 0.6rem; text-align: left; vertical-align: top; font-size: 0.85rem; }
 th { background: #f0f0f0; font-weight: 600; }
-.badge { display: inline-block; padding: 0.1rem 0.5rem; border-radius: 3px; color: white; font-weight: 600; font-size: 0.85rem; text-transform: uppercase; }
-.summary { font-size: 0.9rem; color: #444; }
-.history { display: flex; gap: 1px; margin: 1rem 0; }
-.tick { width: 8px; height: 18px; display: inline-block; background: #ccc; border-radius: 1px; }
-code { background: #eee; padding: 0 0.3rem; border-radius: 2px; }
-pre { background: #1e1e1e; color: #eee; padding: 1rem; border-radius: 4px; overflow-x: auto; font-size: 0.8rem; }
 section { margin: 1.5rem 0; }
-table.fleet td.summary { max-width: 30rem; }
+section > h2 { font-size: 1.05rem; margin: 0 0 0.5rem; }
+.badge { display: inline-block; padding: 0.1rem 0.55rem; border-radius: 3px; color: white; font-weight: 600; font-size: 0.75rem; text-transform: uppercase; }
+.history { display: flex; flex-wrap: wrap; gap: 1px; margin: 0.5rem 0; }
+.tick { width: 6px; height: 18px; display: inline-block; background: #ccc; border-radius: 1px; flex-shrink: 0; }
+code { background: #eee; padding: 0 0.3rem; border-radius: 2px; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 0.85em; }
+pre { background: #1e1e1e; color: #eee; padding: 1rem; border-radius: 4px; overflow-x: auto; font-size: 0.75rem; line-height: 1.4; }
 tr.err-samples td { background: #fff8ec; }
-tr.err-samples summary { cursor: pointer; color: #8a5a00; font-size: 0.85rem; }
-tr.err-samples pre { margin-top: 0.5rem; max-height: 12rem; overflow-y: auto; font-size: 0.75rem; }
+tr.err-samples summary { cursor: pointer; color: #8a5a00; font-size: 0.8rem; }
+tr.err-samples pre { margin-top: 0.5rem; max-height: 12rem; overflow-y: auto; }
+
+/* Horizontal-scroll wrapper would be cleanest but we want the existing
+   sections to still feel native, so just shrink padding on narrow
+   viewports. */
+@media (max-width: 560px) {
+  th, td { padding: 0.3rem 0.4rem; font-size: 0.78rem; }
+  section { margin: 1rem 0; }
+  ul { padding-left: 1.2rem; }
+}
 `;
 
 function main() {
