@@ -110,18 +110,15 @@ if command -v df >/dev/null 2>&1; then
 fi
 
 # Kernel errors in the last hour.
-# Awk filter that JSON-string-escapes one line per input record.
-# Order matters: strip control chars, then escape backslash, then
-# escape double-quote. Escaping backslash AFTER quote would re-
-# escape the backslash inserted by the quote escape. This is the
-# same pattern used for container err_samples below.
-JSON_ESCAPE_AWK='{
-  s = $0
-  gsub(/[\001-\037]/, "", s)
-  gsub(/\\/, "\\\\", s)
-  gsub(/"/, "\\\"", s)
-  printf "\"%s\",", s
-}'
+# JSON-string escaping is done by node (specialists/json-escape-lines.js)
+# rather than awk because awk's gsub replacement-string escaping
+# rules interact unpredictably with awk's own string-literal
+# backslash escaping (double-layer ambiguity that effectively
+# no-ops the obvious "\\\\" / "\\\"" patterns in GNU awk). node's
+# JSON.stringify is the correct unambiguous primitive.
+
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+JSON_ESCAPE_LINES="node ${SCRIPT_DIR}/json-escape-lines.js"
 
 KERNEL_ERRORS_JSON='[]'
 if [ -r /host/var/log/syslog ]; then
@@ -130,7 +127,8 @@ if [ -r /host/var/log/syslog ]; then
   KERNEL_ERRORS_JSON=$(tail -n 2000 /host/var/log/syslog 2>/dev/null \
     | grep -iE 'error|fail|panic|oom|i/o error' \
     | tail -n 50 \
-    | awk "$JSON_ESCAPE_AWK" \
+    | tr -d '\001-\037' \
+    | $JSON_ESCAPE_LINES \
     | sed 's/,$//' \
     | awk 'BEGIN{print "["} {print} END{print "]"}' \
     | tr -d '\n')
@@ -139,7 +137,8 @@ elif [ -r /host/var/log/messages ]; then
   KERNEL_ERRORS_JSON=$(tail -n 2000 /host/var/log/messages 2>/dev/null \
     | grep -iE 'error|fail|panic|oom|i/o error' \
     | tail -n 50 \
-    | awk "$JSON_ESCAPE_AWK" \
+    | tr -d '\001-\037' \
+    | $JSON_ESCAPE_LINES \
     | sed 's/,$//' \
     | awk 'BEGIN{print "["} {print} END{print "]"}' \
     | tr -d '\n')
@@ -182,9 +181,13 @@ if docker_available; then
     # matches; swallow the exit code.
     ERR_COUNT=$(printf '%s\n' "$LOG_TAIL" | { grep -ciE 'error|fatal|panic|fail' || true; })
     # Last 5 matching lines. Strip control chars, CSI residue, OSC
-    # residue, then JSON-escape. We keep TUI-redraw lines after
+    # residue (all awk-friendly text munging), then pipe through
+    # node for JSON-string escaping. We keep TUI-redraw lines after
     # cleanup — the operator sees what was matched and can judge
-    # for themselves whether a line is signal or TUI noise.
+    # for themselves whether a line is signal or TUI noise. JSON
+    # escape goes through node (json-escape-lines.js) because awk's
+    # double-layer escape rules can't reliably produce valid output
+    # when input contains literal `\` or `"` chars.
     ERR_SAMPLES_INNER=$(printf '%s\n' "$LOG_TAIL" \
       | { grep -iE 'error|fatal|panic|fail' || true; } \
       | tail -n 5 \
@@ -193,11 +196,10 @@ if docker_available; then
           gsub(/[\001-\037]/, "", s)
           gsub(/\[[0-9;?]*[A-Za-z]/, "", s)
           gsub(/\][0-9]+;/, "", s)
-          gsub(/\\/, "\\\\", s)
-          gsub(/"/, "\\\"", s)
           gsub(/^[[:space:]]+|[[:space:]]+$/, "", s)
-          if (length(s) > 0) printf "\"%s\",", s
+          if (length(s) > 0) print s
         }' \
+      | $JSON_ESCAPE_LINES \
       | sed 's/,$//')
     ERR_SAMPLES="[${ERR_SAMPLES_INNER}]"
     # JSON-escape name + image.
