@@ -8,7 +8,7 @@
 <body>
 <header>
   <h1>mriiot-022</h1>
-  <p class="generated">regenerated 2026-05-19T11:29:30.428Z</p>
+  <p class="generated">regenerated 2026-05-19T12:06:12.508Z</p>
   <p><a href="../index.html">← fleet</a></p>
 </header>
 <main>
@@ -16,21 +16,21 @@
 <section>
   <h2>now</h2>
   <p>
-    <span class="badge" style="background:#3a9a4a">green</span>
-    all 15 containers healthy; disk 60%; load 0.40
+    <span class="badge" style="background:#c4881e">amber</span>
+    rag-ingestion-worker restarted 2x; load 3.47/4 cores
   </p>
   <ul>
-    <li>cpu: 4.5% (4 cores)</li>
-    <li>mem: 49.1% (1948 / 3967 MB)</li>
-    <li>load: 0.4 / 0.24 / 0.23</li>
-    <li>uptime: 597h</li>
+    <li>cpu: 12.5% (4 cores)</li>
+    <li>mem: 49% (1944 / 3967 MB)</li>
+    <li>load: 3.47 / 1.21 / 0.43</li>
+    <li>uptime: 0h</li>
     <li>kernel hostname: <code>mriiot-022</code></li>
   </ul>
 </section>
 
 <section>
   <h2>history (7d, hourly)</h2>
-  <div class="history"><span class="tick" style="background:#3a9a4a" title="2026-05-19T10:00:25Z green"></span><span class="tick" style="background:#3a9a4a" title="2026-05-19T11:18:05Z green"></span></div>
+  <div class="history"><span class="tick" style="background:#3a9a4a" title="2026-05-19T10:00:25Z green"></span><span class="tick" style="background:#3a9a4a" title="2026-05-19T11:18:05Z green"></span><span class="tick" style="background:#c4881e" title="2026-05-19T12:05:52Z amber"></span></div>
 </section>
 
 <section>
@@ -38,7 +38,7 @@
   <table>
     <thead><tr><th>mount</th><th>size MB</th><th>used MB</th><th>%</th></tr></thead>
     <tbody>
-      <tr><td><code>/etc/hosts</code></td><td>28046</td><td>17057</td><td>60%</td></tr>
+      <tr><td><code>/etc/hosts</code></td><td>28046</td><td>17070</td><td>60%</td></tr>
     </tbody>
   </table>
 </section>
@@ -49,22 +49,35 @@
     <thead><tr><th>name</th><th>image</th><th>state</th><th>health</th><th>restarts</th><th>err lines (last 100)</th></tr></thead>
     <tbody>
       <tr><td><code>cloud-chaser-mriiot-022</code></td><td title="sha256:f8a512efea8c5f573306d1c668322d706cc20d4d5b1f349cb674d72c1a112a3e">sha256:f8a512efea8c5f573…</td><td>running</td><td>none</td><td>0</td><td>0</td></tr>
-      <tr><td><code>royalmaster-staging-customer-portal-1</code></td><td title="sha256:1cfb982b57c6a887e416dda8478f865e06460a4ae893fe3cf0faa91e4ede8175">sha256:1cfb982b57c6a887e…</td><td>running</td><td>healthy</td><td>0</td><td>1</td></tr>
-      <tr class="err-samples"><td colspan="6"><details><summary>1 error-like lines · showing last 1</summary><pre>2026-05-15T09:13:22.611449Z  INFO static_web_server::info: log level: error</pre></details></td></tr>
-      <tr><td><code>royalmaster-staging-technician-portal-1</code></td><td title="sha256:c807e65c2dce76e15e8b4880a0211da57bb2b6038e563edd0d6bf3047e7106a2">sha256:c807e65c2dce76e15…</td><td>running</td><td>healthy</td><td>0</td><td>1</td></tr>
-      <tr class="err-samples"><td colspan="6"><details><summary>1 error-like lines · showing last 1</summary><pre>2026-05-15T09:13:22.814800Z  INFO static_web_server::info: log level: error</pre></details></td></tr>
-      <tr><td><code>royalmaster-staging-historical-entry-frontend-1</code></td><td title="sha256:63262ee7994e7dc4fbd3e9ca5ccb7b97a2f092f913f83c452f5a2a861d374228">sha256:63262ee7994e7dc4f…</td><td>running</td><td>healthy</td><td>0</td><td>1</td></tr>
-      <tr class="err-samples"><td colspan="6"><details><summary>1 error-like lines · showing last 1</summary><pre>2026-05-15T09:13:21.073544Z  INFO static_web_server::info: log level: error</pre></details></td></tr>
-      <tr><td><code>royalmaster-staging-portal-backend-1</code></td><td title="sha256:88139d7b989a9266cf40e5124f2d2f1a46e204e48db13062eef1975e37dfb55b">sha256:88139d7b989a9266c…</td><td>running</td><td>none</td><td>0</td><td>0</td></tr>
+      <tr><td><code>royalmaster-staging-customer-portal-1</code></td><td title="sha256:1cfb982b57c6a887e416dda8478f865e06460a4ae893fe3cf0faa91e4ede8175">sha256:1cfb982b57c6a887e…</td><td>running</td><td>healthy</td><td>0</td><td>2</td></tr>
+      <tr class="err-samples"><td colspan="6"><details><summary>2 error-like lines · showing last 2</summary><pre>2026-05-15T09:13:22.611449Z  INFO static_web_server::info: log level: error
+2026-05-19T12:05:03.019578Z  INFO static_web_server::info: log level: error</pre></details></td></tr>
+      <tr><td><code>royalmaster-staging-technician-portal-1</code></td><td title="sha256:c807e65c2dce76e15e8b4880a0211da57bb2b6038e563edd0d6bf3047e7106a2">sha256:c807e65c2dce76e15…</td><td>running</td><td>healthy</td><td>0</td><td>2</td></tr>
+      <tr class="err-samples"><td colspan="6"><details><summary>2 error-like lines · showing last 2</summary><pre>2026-05-15T09:13:22.814800Z  INFO static_web_server::info: log level: error
+2026-05-19T12:05:03.019569Z  INFO static_web_server::info: log level: error</pre></details></td></tr>
+      <tr><td><code>royalmaster-staging-historical-entry-frontend-1</code></td><td title="sha256:63262ee7994e7dc4fbd3e9ca5ccb7b97a2f092f913f83c452f5a2a861d374228">sha256:63262ee7994e7dc4f…</td><td>running</td><td>healthy</td><td>0</td><td>2</td></tr>
+      <tr class="err-samples"><td colspan="6"><details><summary>2 error-like lines · showing last 2</summary><pre>2026-05-15T09:13:21.073544Z  INFO static_web_server::info: log level: error
+2026-05-19T12:05:03.118446Z  INFO static_web_server::info: log level: error</pre></details></td></tr>
+      <tr><td><code>royalmaster-staging-portal-backend-1</code></td><td title="sha256:88139d7b989a9266cf40e5124f2d2f1a46e204e48db13062eef1975e37dfb55b">sha256:88139d7b989a9266c…</td><td>running</td><td>none</td><td>0</td><td>2</td></tr>
+      <tr class="err-samples"><td colspan="6"><details><summary>2 error-like lines · showing last 2</summary><pre>2026-05-19 12:05:25,004 WARNING app.main: portal-backend: failed to sync slice-6 payload indexes: All connection attempts failed
+/usr/local/lib/python3.13/site-packages/qdrant_client/async_qdrant_remote.py:231: UserWarning: Failed to obtain server version. Unable to check client-server compatibility. Set check_compatibility=False to skip version check.</pre></details></td></tr>
       <tr><td><code>royalmaster-staging-rag-ingestion-api-1</code></td><td title="sha256:baef6142594d4a379358ecd47df6a0e60d1d6cf3a3d37680d3c37bc3409721f6">sha256:baef6142594d4a379…</td><td>running</td><td>none</td><td>0</td><td>0</td></tr>
-      <tr><td><code>royalmaster-staging-rag-ingestion-worker-1</code></td><td title="sha256:baef6142594d4a379358ecd47df6a0e60d1d6cf3a3d37680d3c37bc3409721f6">sha256:baef6142594d4a379…</td><td>running</td><td>none</td><td>0</td><td>0</td></tr>
+      <tr><td><code>royalmaster-staging-rag-ingestion-worker-1</code></td><td title="sha256:baef6142594d4a379358ecd47df6a0e60d1d6cf3a3d37680d3c37bc3409721f6">sha256:baef6142594d4a379…</td><td>running</td><td>none</td><td>2</td><td>3</td></tr>
+      <tr class="err-samples"><td colspan="6"><details><summary>3 error-like lines · showing last 3</summary><pre>httpcore.ConnectError: All connection attempts failed
+httpx.ConnectError: All connection attempts failed
+qdrant_client.http.exceptions.ResponseHandlingException: All connection attempts failed</pre></details></td></tr>
       <tr><td><code>royalmaster-staging-rag-retrieval-1</code></td><td title="sha256:e98fe2619ef9936f82362c52b5350d0b2cb3729761015f2d8bd273d3d449153f">sha256:e98fe2619ef9936f8…</td><td>running</td><td>none</td><td>0</td><td>0</td></tr>
       <tr><td><code>royalmaster-staging-historical-entry-backend-1</code></td><td title="sha256:f1b9bb651646dab43775891e2666102f86004c757072a8ef7c3239c350930b6b">sha256:f1b9bb651646dab43…</td><td>running</td><td>none</td><td>0</td><td>0</td></tr>
       <tr><td><code>royalmaster-staging-rag-generation-1</code></td><td title="sha256:4976a51f66cdb0ab1820120408c297b2ef7cdea67f9135fc86f278986a9619ae">sha256:4976a51f66cdb0ab1…</td><td>running</td><td>none</td><td>0</td><td>0</td></tr>
-      <tr><td><code>royalmaster-staging-postgres-1</code></td><td title="sha256:890480b08124ce7f79960a9bb16fe39729aa302bd384bfd7c408fee6c8f7adb7">sha256:890480b08124ce7f7…</td><td>running</td><td>healthy</td><td>0</td><td>0</td></tr>
+      <tr><td><code>royalmaster-staging-postgres-1</code></td><td title="sha256:890480b08124ce7f79960a9bb16fe39729aa302bd384bfd7c408fee6c8f7adb7">sha256:890480b08124ce7f7…</td><td>running</td><td>healthy</td><td>0</td><td>2</td></tr>
+      <tr class="err-samples"><td colspan="6"><details><summary>2 error-like lines · showing last 2</summary><pre>2026-05-19 12:03:52.031 UTC [50195] FATAL:  terminating connection due to administrator command
+2026-05-19 12:03:52.046 UTC [50196] FATAL:  terminating connection due to administrator command</pre></details></td></tr>
       <tr><td><code>royalmaster-staging-mongo-1</code></td><td title="sha256:6fa660675b272b56258de5d2bcb1459c7783667008218783a27f13698efcbec5">sha256:6fa660675b272b562…</td><td>running</td><td>healthy</td><td>0</td><td>0</td></tr>
       <tr><td><code>royalmaster-staging-qdrant-1</code></td><td title="sha256:b3063c673f3973877c038eeecc392bad5011f072ee7892b56c9a8e204a3bdea9">sha256:b3063c673f3973877…</td><td>running</td><td>healthy</td><td>0</td><td>0</td></tr>
-      <tr><td><code>royalmaster-staging-redis-1</code></td><td title="sha256:5d5154123426693540ea6c1d9e638eae2bf2024879c839db6fcfdd7717e817c7">sha256:5d515412342669354…</td><td>running</td><td>healthy</td><td>0</td><td>0</td></tr>
+      <tr><td><code>royalmaster-staging-redis-1</code></td><td title="sha256:5d5154123426693540ea6c1d9e638eae2bf2024879c839db6fcfdd7717e817c7">sha256:5d515412342669354…</td><td>running</td><td>healthy</td><td>0</td><td>3</td></tr>
+      <tr class="err-samples"><td colspan="6"><details><summary>3 error-like lines · showing last 3</summary><pre>9:C 19 May 2026 12:05:03.451 # WARNING Memory overcommit must be enabled! Without it, a background save or replication may fail under low memory condition. Being disabled, it can also cause failures without low memory condition, see https://github.com/jemalloc/jemalloc/issues/1328. To fix this issue add &#39;vm.overcommit_memory = 1&#39; to /etc/sysctl.conf and then reboot or run the command &#39;sysctl vm.overcommit_memory=1&#39; for this to take effect.
+9:M 19 May 2026 12:05:05.218 # &lt;redisgears_2&gt; could not initialize RedisAI_InitError
+9:M 19 May 2026 12:05:05.218 * &lt;redisgears_2&gt; Failed loading RedisAI API.</pre></details></td></tr>
       <tr><td><code>royalmaster-staging-dozzle-1</code></td><td title="sha256:1cc972250626553009ddacbdf1f5725b681cdcbabe551fec69cd728882ffbc58">sha256:1cc97225062655300…</td><td>running</td><td>none</td><td>0</td><td>1</td></tr>
       <tr class="err-samples"><td colspan="6"><details><summary>1 error-like lines · showing last 1</summary><pre>{&quot;level&quot;:&quot;error&quot;,&quot;version&quot;:&quot;v10.5.3&quot;,&quot;host&quot;:&quot;mriiot-022&quot;,&quot;time&quot;:&quot;2026-05-13T15:44:44Z&quot;,&quot;message&quot;:&quot;unexpected error while listening to docker events&quot;}</pre></details></td></tr>
     </tbody>
