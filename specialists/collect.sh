@@ -160,15 +160,33 @@ if docker_available; then
     RESTARTS=$(docker inspect --format '{{.RestartCount}}' "$CID" 2>/dev/null)
     STARTED=$(docker inspect --format '{{.State.StartedAt}}' "$CID" 2>/dev/null)
     EXIT_CODE=$(docker inspect --format '{{.State.ExitCode}}' "$CID" 2>/dev/null)
-    # Recent error lines (last 100 log lines, grep'd). grep -c
-    # emits the count even when zero, and exits 1 on no matches;
-    # swallow the exit code so the count is the only output.
-    ERR_COUNT=$(docker logs --tail 100 "$CID" 2>&1 | { grep -ciE 'error|fatal|panic|fail' || true; })
+    # Capture the last 100 log lines once, then derive both the
+    # count of error-like lines AND the last 5 actual lines (samples)
+    # from that same buffer. Two grep passes on a small string is
+    # cheaper than two `docker logs` round trips.
+    LOG_TAIL=$(docker logs --tail 100 "$CID" 2>&1 || true)
+    # grep -c emits the count (even when zero) and exits 1 on no
+    # matches; swallow the exit code.
+    ERR_COUNT=$(printf '%s\n' "$LOG_TAIL" | { grep -ciE 'error|fatal|panic|fail' || true; })
+    # Last 5 matching lines, JSON-escaped (backslash, double-quote,
+    # control chars stripped). Empty when ERR_COUNT is 0.
+    ERR_SAMPLES_INNER=$(printf '%s\n' "$LOG_TAIL" \
+      | { grep -iE 'error|fatal|panic|fail' || true; } \
+      | tail -n 5 \
+      | awk '{
+          s = $0
+          gsub(/\\/, "\\\\", s)
+          gsub(/"/, "\\\"", s)
+          gsub(/[\001-\037]/, "", s)
+          printf "\"%s\",", s
+        }' \
+      | sed 's/,$//')
+    ERR_SAMPLES="[${ERR_SAMPLES_INNER}]"
     # JSON-escape name + image.
     NAME_J=$(printf '%s' "$NAME" | sed 's/"/\\"/g')
     IMG_J=$(printf '%s' "$IMAGE" | sed 's/"/\\"/g')
-    printf '{"id":"%s","name":"%s","image":"%s","state":"%s","health":"%s","restart_count":%s,"started_at":"%s","exit_code":%s,"err_lines_last_100":%s},' \
-      "${CID:0:12}" "$NAME_J" "$IMG_J" "$STATE" "$HEALTH_STR" "${RESTARTS:-0}" "$STARTED" "${EXIT_CODE:-0}" "${ERR_COUNT:-0}"
+    printf '{"id":"%s","name":"%s","image":"%s","state":"%s","health":"%s","restart_count":%s,"started_at":"%s","exit_code":%s,"err_lines_last_100":%s,"err_samples":%s},' \
+      "${CID:0:12}" "$NAME_J" "$IMG_J" "$STATE" "$HEALTH_STR" "${RESTARTS:-0}" "$STARTED" "${EXIT_CODE:-0}" "${ERR_COUNT:-0}" "$ERR_SAMPLES"
   done | sed 's/,$//')
   DOCKER_JSON=$(printf '{"available":true,"containers":[%s]}' "$CONTAINER_ROWS")
 fi

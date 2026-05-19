@@ -171,7 +171,13 @@ ${disks.map(d => `      <tr><td><code>${escapeHtml(d.mount)}</code></td><td>${es
     ? `<table>
     <thead><tr><th>name</th><th>image</th><th>state</th><th>health</th><th>restarts</th><th>err lines (last 100)</th></tr></thead>
     <tbody>
-${containers.map(c => `      <tr><td><code>${escapeHtml(c.name)}</code></td><td>${escapeHtml(c.image)}</td><td>${escapeHtml(c.state)}</td><td>${escapeHtml(c.health)}</td><td>${escapeHtml(c.restart_count)}</td><td>${escapeHtml(c.err_lines_last_100)}</td></tr>`).join('\n')}
+${containers.map(c => {
+        const samples = Array.isArray(c.err_samples) ? c.err_samples : [];
+        const sampleRow = samples.length
+          ? `\n      <tr class="err-samples"><td colspan="6"><details><summary>${escapeHtml(c.err_lines_last_100)} error-like lines · showing last ${samples.length}</summary><pre>${samples.map(escapeHtml).join('\n')}</pre></details></td></tr>`
+          : '';
+        return `      <tr><td><code>${escapeHtml(c.name)}</code></td><td title="${escapeHtml(c.image)}">${escapeHtml(c.image.length > 24 ? c.image.slice(0, 24) + '…' : c.image)}</td><td>${escapeHtml(c.state)}</td><td>${escapeHtml(c.health)}</td><td>${escapeHtml(c.restart_count)}</td><td>${escapeHtml(c.err_lines_last_100)}</td></tr>${sampleRow}`;
+      }).join('\n')}
     </tbody>
   </table>`
     : '<p><em>docker socket unreachable</em></p>'}
@@ -204,6 +210,9 @@ code { background: #eee; padding: 0 0.3rem; border-radius: 2px; }
 pre { background: #1e1e1e; color: #eee; padding: 1rem; border-radius: 4px; overflow-x: auto; font-size: 0.8rem; }
 section { margin: 1.5rem 0; }
 table.fleet td.summary { max-width: 30rem; }
+tr.err-samples td { background: #fff8ec; }
+tr.err-samples summary { cursor: pointer; color: #8a5a00; font-size: 0.85rem; }
+tr.err-samples pre { margin-top: 0.5rem; max-height: 12rem; overflow-y: auto; font-size: 0.75rem; }
 `;
 
 function main() {
