@@ -168,17 +168,32 @@ if docker_available; then
     # grep -c emits the count (even when zero) and exits 1 on no
     # matches; swallow the exit code.
     ERR_COUNT=$(printf '%s\n' "$LOG_TAIL" | { grep -ciE 'error|fatal|panic|fail' || true; })
-    # Last 5 matching lines, JSON-escaped (backslash, double-quote,
-    # control chars stripped). Empty when ERR_COUNT is 0.
+    # Last 5 matching lines, cleaned + JSON-escaped. Skip lines
+    # dominated by ANSI control characters (TUI redraws like the
+    # claude-code TUI's "Auto-update failed" toast — not real
+    # errors). Threshold of 4+ control chars per line catches TUI
+    # noise without rejecting log lines that legitimately use a
+    # color escape or two.
     ERR_SAMPLES_INNER=$(printf '%s\n' "$LOG_TAIL" \
       | { grep -iE 'error|fatal|panic|fail' || true; } \
       | tail -n 5 \
       | awk '{
+          # Count control chars in the original line.
+          n = 0
+          orig = $0
+          while (match(orig, /[\001-\037]/) > 0) {
+            n++
+            orig = substr(orig, RSTART + 1)
+          }
+          if (n > 4) next
           s = $0
+          gsub(/[\001-\037]/, "", s)
+          gsub(/\[[0-9;?]*[A-Za-z]/, "", s)
+          gsub(/\][0-9]+;/, "", s)
           gsub(/\\/, "\\\\", s)
           gsub(/"/, "\\\"", s)
-          gsub(/[\001-\037]/, "", s)
-          printf "\"%s\",", s
+          gsub(/^[[:space:]]+|[[:space:]]+$/, "", s)
+          if (length(s) > 0) printf "\"%s\",", s
         }' \
       | sed 's/,$//')
     ERR_SAMPLES="[${ERR_SAMPLES_INNER}]"

@@ -129,7 +129,7 @@ echo "{\"ts\":\"$(date -u +%FT%TZ)\",\"hostname\":\"$SERVER_NAME\",\"error\":\"c
 Notify `@NOTIFY_PEER` of the failure but continue the cycle so
 the dashboard reflects the outage.
 
-### Step 3 — Score (your turn)
+### Step 3 — Score (your turn + bash)
 
 Read the snapshot you just wrote. Compute `overall_health`
 ("green" | "amber" | "red") per these rules:
@@ -140,20 +140,24 @@ Read the snapshot you just wrote. Compute `overall_health`
 | amber | any disk ≥ 80%, mem ≥ 90%, load > ncores, any error-line spike (≥ 5 lines in a container's last-hour logs that wasn't there last cycle), any container restarted in the last hour |
 | green | none of the above                                                   |
 
-Patch the snapshot file in place to add `"overall_health": "<tier>"`
-at the top level, plus a one-line `"summary"` field — a short
-human-readable description of what's driving the colour. Examples:
+Compose a one-line summary describing what's driving the colour:
 
 - green: `"all 8 containers healthy; disks 23-45%; load 0.4"`
 - amber: `"redis logs spiking (12 errors/hr); /data at 84%"`
 - red:   `"/var at 97%; nginx container unhealthy for 12m"`
 
-Also overwrite `data/$SERVER_NAME/latest.json` with the same
-content. This is the file the dashboard reads as "current state."
+Then patch the snapshot with the deterministic helper (do NOT hand-edit
+the JSON — agents drift on commas/indentation and the dashboard's
+`JSON.parse` will reject the file):
 
 ```bash
+node specialists/patch-snapshot.js data/$SERVER_NAME/$TS.json "$HEALTH" "$SUMMARY"
 cp data/$SERVER_NAME/$TS.json data/$SERVER_NAME/latest.json
 ```
+
+where `$HEALTH` is `green` / `amber` / `red` and `$SUMMARY` is your
+one-liner. `latest.json` is the file the dashboard reads as "current
+state."
 
 ### Step 4 — Prune (bash)
 
