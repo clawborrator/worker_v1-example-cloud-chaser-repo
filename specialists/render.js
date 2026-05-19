@@ -132,25 +132,23 @@ function renderServer(server, latest, history) {
 </head>
 <body>
 <header>
+  <p class="crumb"><a href="../index.html">← fleet</a></p>
   <h1>${escapeHtml(server)}</h1>
   <p class="generated">regenerated ${escapeHtml(ts)}</p>
-  <p><a href="../index.html">← fleet</a></p>
 </header>
 <main>
 
-<section>
-  <h2>now</h2>
-  <p>
-    <span class="badge" style="background:${tierColor(latest.overall_health)}">${escapeHtml(latest.overall_health || 'unknown')}</span>
-    ${escapeHtml(latest.summary || '')}
-  </p>
-  <ul>
-    <li>cpu: ${escapeHtml((latest.cpu && latest.cpu.pct) || 0)}% (${escapeHtml((latest.cpu && latest.cpu.ncores) || 0)} cores)</li>
-    <li>mem: ${escapeHtml((latest.mem && latest.mem.pct) || 0)}% (${escapeHtml((latest.mem && latest.mem.used_mb) || 0)} / ${escapeHtml((latest.mem && latest.mem.total_mb) || 0)} MB)</li>
-    <li>load: ${escapeHtml((latest.load && latest.load['1m']) || 0)} / ${escapeHtml((latest.load && latest.load['5m']) || 0)} / ${escapeHtml((latest.load && latest.load['15m']) || 0)}</li>
-    <li>uptime: ${escapeHtml(Math.floor((latest.uptime_s || 0) / 3600))}h</li>
-    <li>kernel hostname: <code>${escapeHtml(latest.kernel_host || '?')}</code></li>
-  </ul>
+<section class="now-card" style="--c:${tierColor(latest.overall_health)}">
+  <div class="now-head">
+    <span class="now-badge">${escapeHtml(latest.overall_health || 'unknown')}</span>
+    <span class="now-summary">${escapeHtml(latest.summary || '')}</span>
+  </div>
+  <div class="now-stats">
+    <div><span class="stat-label">cpu</span><span class="stat-val">${escapeHtml((latest.cpu && latest.cpu.pct) || 0)}%</span><span class="stat-sub">${escapeHtml((latest.cpu && latest.cpu.ncores) || 0)} cores</span></div>
+    <div><span class="stat-label">mem</span><span class="stat-val">${escapeHtml((latest.mem && latest.mem.pct) || 0)}%</span><span class="stat-sub">${escapeHtml((latest.mem && latest.mem.used_mb) || 0)} / ${escapeHtml((latest.mem && latest.mem.total_mb) || 0)} MB</span></div>
+    <div><span class="stat-label">load 1m</span><span class="stat-val">${escapeHtml((latest.load && latest.load['1m']) || 0)}</span><span class="stat-sub">5m ${escapeHtml((latest.load && latest.load['5m']) || 0)} · 15m ${escapeHtml((latest.load && latest.load['15m']) || 0)}</span></div>
+    <div><span class="stat-label">uptime</span><span class="stat-val">${escapeHtml(Math.floor((latest.uptime_s || 0) / 3600))}h</span><span class="stat-sub">kernel <code>${escapeHtml(latest.kernel_host || '?')}</code></span></div>
+  </div>
 </section>
 
 <section>
@@ -160,18 +158,18 @@ function renderServer(server, latest, history) {
 
 <section>
   <h2>disks</h2>
-  <table>
+  <div class="table-wrap"><table>
     <thead><tr><th>mount</th><th>size MB</th><th>used MB</th><th>%</th></tr></thead>
     <tbody>
 ${disks.map(d => `      <tr><td><code>${escapeHtml(d.mount)}</code></td><td>${escapeHtml(d.size_mb)}</td><td>${escapeHtml(d.used_mb)}</td><td>${escapeHtml(d.pct)}%</td></tr>`).join('\n')}
     </tbody>
-  </table>
+  </table></div>
 </section>
 
 <section>
   <h2>containers</h2>
   ${(latest.docker && latest.docker.available)
-    ? `<table>
+    ? `<div class="table-wrap"><table>
     <thead><tr><th>name</th><th>image</th><th>state</th><th>health</th><th>restarts</th><th>err lines (last 100)</th></tr></thead>
     <tbody>
 ${containers.map(c => {
@@ -186,7 +184,7 @@ ${containers.map(c => {
         return `      <tr><td><code>${escapeHtml(c.name)}</code></td><td title="${escapeHtml(c.image)}">${escapeHtml(c.image.length > 24 ? c.image.slice(0, 24) + '…' : c.image)}</td><td>${escapeHtml(c.state)}</td><td>${escapeHtml(c.health)}</td><td>${escapeHtml(c.restart_count)}</td><td>${escapeHtml(count)}</td></tr>${sampleRow}`;
       }).join('\n')}
     </tbody>
-  </table>`
+  </table></div>`
     : '<p><em>docker socket unreachable</em></p>'}
 </section>
 
@@ -243,10 +241,29 @@ header .generated { color: #888; font-size: 0.8rem; margin: 0.3rem 0 0; }
 
 .empty { color: #888; text-align: center; margin: 3rem 0; }
 
-/* === Per-server detail page (kept tabular, made mobile-tolerant). === */
-table { border-collapse: collapse; width: 100%; background: white; }
-th, td { border: 1px solid #ddd; padding: 0.4rem 0.6rem; text-align: left; vertical-align: top; font-size: 0.85rem; }
-th { background: #f0f0f0; font-weight: 600; }
+/* === Per-server detail page. === */
+.crumb { font-size: 0.85rem; margin: 0 0 0.4rem; }
+.crumb a { color: #555; text-decoration: none; }
+.crumb a:hover { text-decoration: underline; }
+
+/* "now" snapshot card — matches the fleet index visual language. */
+.now-card { background: white; border-radius: 8px; padding: 1rem 1.1rem; border-left: 4px solid var(--c, #888); box-shadow: 0 1px 2px rgba(0,0,0,0.04); margin: 0 0 1.25rem; }
+.now-head { display: flex; align-items: center; gap: 0.6rem; flex-wrap: wrap; }
+.now-badge { display: inline-block; padding: 0.15rem 0.6rem; border-radius: 3px; color: white; font-weight: 600; font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.03em; background: var(--c, #888); }
+.now-summary { font-size: 0.95rem; color: #333; }
+.now-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 0.7rem 1rem; margin-top: 0.9rem; }
+.now-stats > div { display: flex; flex-direction: column; min-width: 0; }
+.now-stats .stat-val { font-size: 1.1rem; }
+.stat-sub { font-size: 0.72rem; color: #888; margin-top: 0.1rem; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+/* Table-wrap: horizontal scroll on narrow viewports so wide tables
+   don't blow out the layout. */
+.table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; background: white; border-radius: 6px; box-shadow: 0 1px 2px rgba(0,0,0,0.03); }
+table { border-collapse: collapse; width: 100%; min-width: 480px; background: white; }
+th, td { border-bottom: 1px solid #eee; padding: 0.45rem 0.6rem; text-align: left; vertical-align: top; font-size: 0.85rem; }
+th { background: #f6f6f6; font-weight: 600; border-bottom: 1px solid #ddd; position: sticky; top: 0; }
+tr:last-child td { border-bottom: none; }
+
 section { margin: 1.5rem 0; }
 section > h2 { font-size: 1.05rem; margin: 0 0 0.5rem; }
 .badge { display: inline-block; padding: 0.1rem 0.55rem; border-radius: 3px; color: white; font-weight: 600; font-size: 0.75rem; text-transform: uppercase; }
@@ -258,13 +275,11 @@ tr.err-samples td { background: #fff8ec; }
 tr.err-samples summary { cursor: pointer; color: #8a5a00; font-size: 0.8rem; }
 tr.err-samples pre { margin-top: 0.5rem; max-height: 12rem; overflow-y: auto; }
 
-/* Horizontal-scroll wrapper would be cleanest but we want the existing
-   sections to still feel native, so just shrink padding on narrow
-   viewports. */
 @media (max-width: 560px) {
-  th, td { padding: 0.3rem 0.4rem; font-size: 0.78rem; }
+  th, td { padding: 0.35rem 0.45rem; font-size: 0.78rem; }
   section { margin: 1rem 0; }
-  ul { padding-left: 1.2rem; }
+  .stat-val { font-size: 1rem; }
+  .now-card { padding: 0.85rem 0.9rem; }
 }
 `;
 
