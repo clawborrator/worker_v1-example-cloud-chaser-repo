@@ -110,6 +110,19 @@ if command -v df >/dev/null 2>&1; then
 fi
 
 # Kernel errors in the last hour.
+# Awk filter that JSON-string-escapes one line per input record.
+# Order matters: strip control chars, then escape backslash, then
+# escape double-quote. Escaping backslash AFTER quote would re-
+# escape the backslash inserted by the quote escape. This is the
+# same pattern used for container err_samples below.
+JSON_ESCAPE_AWK='{
+  s = $0
+  gsub(/[\001-\037]/, "", s)
+  gsub(/\\/, "\\\\", s)
+  gsub(/"/, "\\\"", s)
+  printf "\"%s\",", s
+}'
+
 KERNEL_ERRORS_JSON='[]'
 if [ -r /host/var/log/syslog ]; then
   # Last hour by mtime — simple grep on a timestamp range is fragile
@@ -117,7 +130,7 @@ if [ -r /host/var/log/syslog ]; then
   KERNEL_ERRORS_JSON=$(tail -n 2000 /host/var/log/syslog 2>/dev/null \
     | grep -iE 'error|fail|panic|oom|i/o error' \
     | tail -n 50 \
-    | awk '{gsub(/"/, "\\\""); printf "\"%s\",", $0}' \
+    | awk "$JSON_ESCAPE_AWK" \
     | sed 's/,$//' \
     | awk 'BEGIN{print "["} {print} END{print "]"}' \
     | tr -d '\n')
@@ -126,7 +139,7 @@ elif [ -r /host/var/log/messages ]; then
   KERNEL_ERRORS_JSON=$(tail -n 2000 /host/var/log/messages 2>/dev/null \
     | grep -iE 'error|fail|panic|oom|i/o error' \
     | tail -n 50 \
-    | awk '{gsub(/"/, "\\\""); printf "\"%s\",", $0}' \
+    | awk "$JSON_ESCAPE_AWK" \
     | sed 's/,$//' \
     | awk 'BEGIN{print "["} {print} END{print "]"}' \
     | tr -d '\n')
