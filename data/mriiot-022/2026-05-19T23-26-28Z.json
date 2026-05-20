@@ -1,27 +1,27 @@
 {
-  "ts": "2026-05-20T00:26:27Z",
+  "ts": "2026-05-19T23:26:28Z",
   "hostname": "mriiot-022",
   "kernel_host": "mriiot-022",
-  "uptime_s": 43448,
+  "uptime_s": 39848,
   "load": {
-    "1m": 0.24,
-    "5m": 0.31,
-    "15m": 0.31
+    "1m": 0.32,
+    "5m": 0.22,
+    "15m": 0.24
   },
   "cpu": {
     "ncores": 4,
-    "pct": 5.5
+    "pct": 26.4
   },
   "mem": {
     "total_mb": 3967,
-    "used_mb": 2317,
-    "pct": 58.4
+    "used_mb": 2293,
+    "pct": 57.8
   },
   "disks": [
     {
       "mount": "/etc/hosts",
       "size_mb": 28046,
-      "used_mb": 16765,
+      "used_mb": 16756,
       "pct": 59
     }
   ],
@@ -231,5 +231,5 @@
     ]
   },
   "overall_health": "green",
-  "summary": "all 15 containers healthy; disks 59%; mem 58%; load 0.24"
+  "summary": "all 15 containers healthy; disks 59%; mem 57%; load 0.32"
 }
