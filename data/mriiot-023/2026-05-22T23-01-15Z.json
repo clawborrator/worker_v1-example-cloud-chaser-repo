@@ -1,0 +1,60 @@
+{
+  "ts": "2026-05-22T23:01:15Z",
+  "hostname": "mriiot-023",
+  "kernel_host": "mriiot-023",
+  "uptime_s": 512,
+  "load": {
+    "1m": 0.53,
+    "5m": 0.67,
+    "15m": 0.47
+  },
+  "cpu": {
+    "ncores": 2,
+    "pct": 13.1
+  },
+  "mem": {
+    "total_mb": 3968,
+    "used_mb": 1633,
+    "pct": 41.2
+  },
+  "disks": [
+    {
+      "mount": "/etc/hosts",
+      "size_mb": 28046,
+      "used_mb": 16119,
+      "pct": 57
+    }
+  ],
+  "kernel_errors_last_hour": [],
+  "docker": {
+    "available": true,
+    "containers": [
+      {
+        "id": "909d79fadab2",
+        "name": "reddit-engager",
+        "image": "sha256:a6bdb2944f2df52d6bb31ddb0b6bea339ab03f54e0276d0fb070ba81ef4418cd",
+        "state": "running",
+        "health": "none",
+        "restart_count": 0,
+        "started_at": "2026-05-22T22:53:07.17415429Z",
+        "exit_code": 0,
+        "err_lines_last_100": 0,
+        "err_samples": []
+      },
+      {
+        "id": "7e818cb95235",
+        "name": "cloud-chaser-mriiot-023",
+        "image": "sha256:f8a512efea8c5f573306d1c668322d706cc20d4d5b1f349cb674d72c1a112a3e",
+        "state": "running",
+        "health": "none",
+        "restart_count": 0,
+        "started_at": "2026-05-22T22:53:07.044921399Z",
+        "exit_code": 0,
+        "err_lines_last_100": 0,
+        "err_samples": []
+      }
+    ]
+  },
+  "overall_health": "green",
+  "summary": "all 2 containers healthy; disks 57%; load 0.5"
+}
