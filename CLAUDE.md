@@ -183,26 +183,41 @@ other nodes' files are not touched.
 
 ```bash
 cd /workspace/repo
+
+# Save this node's own snapshot before sync
+SNAPSHOT_FILE="data/$SERVER_NAME/$TS.json"
+[ -f "$SNAPSHOT_FILE" ] && cp "$SNAPSHOT_FILE" /tmp/snapshot-backup.json
+
+# Sync working tree fully to origin (hard-reset, not soft)
 git fetch origin
-git reset --soft origin/main
+git reset --hard origin/main && git clean -fd
+
+# Restore this node's snapshot
+[ -f /tmp/snapshot-backup.json ] && cp /tmp/snapshot-backup.json "$SNAPSHOT_FILE"
+
+# Render from complete data tree (all servers present)
 node specialists/render.js
+
+# Commit
 git add data/$SERVER_NAME/ public/
 git commit -m "cloud-chaser $SERVER_NAME $TS · $OVERALL_HEALTH"
 
-# Retry loop on concurrent push rejection
+# Retry loop on push rejection
 while ! git push origin main; do
+  [ -f "$SNAPSHOT_FILE" ] && cp "$SNAPSHOT_FILE" /tmp/snapshot-backup.json
   git fetch origin
-  git reset --soft origin/main
+  git reset --hard origin/main && git clean -fd
+  [ -f /tmp/snapshot-backup.json ] && cp /tmp/snapshot-backup.json "$SNAPSHOT_FILE"
   node specialists/render.js
   git add data/$SERVER_NAME/ public/
   git commit --amend --no-edit
 done
 ```
 
-Fetch origin before rendering to include latest data from other nodes.
-`git reset --soft` keeps the snapshot as staged changes. Re-render after
-reset so `public/index.html` reflects the current data/ state. Deterministic
-render ensures conflicts are resolved; retry loop converges within the cycle.
+Working tree must fully match origin before rendering so render.js sees all
+servers' data files. Save this node's new snapshot before hard-reset, restore
+after sync, render from complete tree, then commit and push. Retry loop syncs
+and re-renders on push rejection. Deterministic render ensures stable output.
 
 ### Step 7 — Notify (MCP)
 
