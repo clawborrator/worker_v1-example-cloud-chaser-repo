@@ -169,44 +169,40 @@ find data/$SERVER_NAME -name '*.json' -not -name 'latest.json' -mmin +10080 -del
 
 (10080 minutes = 7 days. `latest.json` is preserved unconditionally.)
 
-### Step 5 — Render the dashboard (bash)
+### Step 5 — Render (bash)
 
 ```bash
 node specialists/render.js
 ```
 
-Reads every `data/*/latest.json` plus the last 168 hours of
-history per server. Writes:
-
-- `public/index.html` — overall dashboard, one row per server,
-  status badges, key metrics, last-update timestamp.
-- `public/server/<server>.html` — per-server detail page,
-  history strip, container table, recent errors.
-- `public/style.css` — written once, idempotent on subsequent
-  runs.
-
-The renderer is deterministic over the input data, so two
-concurrent workers regenerating it produce byte-identical output
-(no commit churn).
+Renders `public/index.html` from all servers' latest data + history.
+Each node owns only `data/$SERVER_NAME/` and `public/server/$SERVER_NAME.html`;
+other nodes' files are not touched.
 
 ### Step 6 — Commit + push (bash)
 
 ```bash
 cd /workspace/repo
+git fetch origin
+git reset --soft origin/main
+node specialists/render.js
 git add data/$SERVER_NAME/ public/
-git pull --rebase origin main || true
 git commit -m "cloud-chaser $SERVER_NAME $TS · $OVERALL_HEALTH"
-# Push, with one retry on rejected-non-fast-forward.
-git push origin main || (git pull --rebase origin main && git push origin main) || {
-  # If a second push still fails, log and notify; next cycle will
-  # carry the bundle along with its own.
-  echo "push rejected twice, deferring to next cycle"
-}
+
+# Retry loop on concurrent push rejection
+while ! git push origin main; do
+  git fetch origin
+  git reset --soft origin/main
+  node specialists/render.js
+  git add data/$SERVER_NAME/ public/
+  git commit --amend --no-edit
+done
 ```
 
-If `git push` fails twice in a row, do NOT panic-retry. The next
-cycle will catch up; locally on this server the JSON snapshot is
-still on disk and will be included in the next commit.
+Fetch origin before rendering to include latest data from other nodes.
+`git reset --soft` keeps the snapshot as staged changes. Re-render after
+reset so `public/index.html` reflects the current data/ state. Deterministic
+render ensures conflicts are resolved; retry loop converges within the cycle.
 
 ### Step 7 — Notify (MCP)
 
@@ -301,8 +297,7 @@ part of the snapshot:
 | `/host/etc/hostname` mount missing   | Notify, skip cycle, return. Operator must fix docker-compose volumes and restart, or set `SERVER_NAME_OVERRIDE` in .env. |
 | `collect.sh` non-zero exit           | Write error-snapshot, notify, continue (so the dashboard reflects the outage). |
 | Docker socket unreachable            | `collect.sh` marks docker section unavailable; rest of cycle continues. |
-| `git pull --rebase` fails (conflict) | Almost impossible since paths are scoped per server; if it happens, abort the cycle and notify with the conflict path. |
-| `git push` rejected twice            | Log, return. Next cycle's commit will include this one's data.    |
+| `git push` rejected                  | Retry loop within the cycle: fetch, soft-reset, re-render, commit --amend, push. Converges once no other node is pushing. |
 | `route_to_peer` errors               | Log, return. Don't retry; not worth the loop.                     |
 | Anthropic rate-limit / token expiry  | Log. Return. Hourly cron is plenty of natural backoff.            |
 
@@ -323,8 +318,9 @@ the dashboard timeline isn't blank when the operator looks.
   Read-only observer. Period.
 - **Don't run cycles more often than the cron schedule.** Hourly
   is the contract; sub-hourly cycles burn budget without adding signal.
-- **Don't push without `git pull --rebase` first.** Two simultaneous
-  workers on the same repo will collide otherwise.
+- **Don't push without fetching and soft-resetting to origin first.**
+  Fetch to sync, soft-reset to move branch pointer while preserving changes,
+  re-render to resolve concurrency, then push. Retry loop on rejection.
 - **Don't notify on every cycle when healthy.** Default is
   `NOTIFY_ON_PROBLEM_ONLY=1`. Respect the operator's signal-to-noise
   preference.
