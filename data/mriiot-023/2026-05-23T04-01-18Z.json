@@ -1,0 +1,64 @@
+{
+  "ts": "2026-05-23T04:01:18Z",
+  "hostname": "mriiot-023",
+  "kernel_host": "mriiot-023",
+  "uptime_s": 18515,
+  "load": {
+    "1m": 0.16,
+    "5m": 0.04,
+    "15m": 0.01
+  },
+  "cpu": {
+    "ncores": 2,
+    "pct": 10
+  },
+  "mem": {
+    "total_mb": 3968,
+    "used_mb": 1946,
+    "pct": 49
+  },
+  "disks": [
+    {
+      "mount": "/etc/hosts",
+      "size_mb": 28046,
+      "used_mb": 16164,
+      "pct": 57
+    }
+  ],
+  "kernel_errors_last_hour": [],
+  "docker": {
+    "available": true,
+    "containers": [
+      {
+        "id": "909d79fadab2",
+        "name": "reddit-engager",
+        "image": "sha256:a6bdb2944f2df52d6bb31ddb0b6bea339ab03f54e0276d0fb070ba81ef4418cd",
+        "state": "running",
+        "health": "none",
+        "restart_count": 0,
+        "started_at": "2026-05-22T23:02:51.770556468Z",
+        "exit_code": 0,
+        "err_lines_last_100": 3,
+        "err_samples": [
+          "✗Auto-updatefailed·Tryclaudedoctor ornpmi-g@anthropic-ai/claude-c…",
+          "✳ Bootstrap cron and execute warmup cycle✻Cooked for 4m 15s────────────────────────────────────────────────────────────────────────────────❯ Execute one Reddit engagement cycle per CLAUDE.md.  ⏵⏵ bypass permissions on (shift+tab to cycle) · ← for agents  ✗ Auto-update failed · Try claude doctor or npm i -g @anthropic-ai/claude-c……           ✗Auto-update failed · Try claude doctor or npm i -g @anthropi",
+          "✗ Auto-updatefailed · Try claude doctor or npm i -g @anthropic-ai/claude-"
+        ]
+      },
+      {
+        "id": "7e818cb95235",
+        "name": "cloud-chaser-mriiot-023",
+        "image": "sha256:f8a512efea8c5f573306d1c668322d706cc20d4d5b1f349cb674d72c1a112a3e",
+        "state": "running",
+        "health": "none",
+        "restart_count": 0,
+        "started_at": "2026-05-22T22:53:07.044921399Z",
+        "exit_code": 0,
+        "err_lines_last_100": 0,
+        "err_samples": []
+      }
+    ]
+  },
+  "overall_health": "green",
+  "summary": "reddit-engager errors receding (3); all containers healthy; disks 57%; load 0.16"
+}
