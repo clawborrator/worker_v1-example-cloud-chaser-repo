@@ -1,0 +1,96 @@
+{
+  "ts": "2026-05-24T08:01:12Z",
+  "hostname": "mriiot-023",
+  "kernel_host": "mriiot-023",
+  "uptime_s": 119309,
+  "load": {
+    "1m": 0.38,
+    "5m": 0.25,
+    "15m": 0.23
+  },
+  "cpu": {
+    "ncores": 2,
+    "pct": 21
+  },
+  "mem": {
+    "total_mb": 3968,
+    "used_mb": 2078,
+    "pct": 52.4
+  },
+  "disks": [
+    {
+      "mount": "/etc/hosts",
+      "size_mb": 28046,
+      "used_mb": 16874,
+      "pct": 60
+    }
+  ],
+  "kernel_errors_last_hour": [],
+  "docker": {
+    "available": true,
+    "containers": [
+      {
+        "id": "f19aebdeab2e",
+        "name": "orchard-viper-conductor",
+        "image": "sha256:f8a512efea8c5f573306d1c668322d706cc20d4d5b1f349cb674d72c1a112a3e",
+        "state": "running",
+        "health": "none",
+        "restart_count": 0,
+        "started_at": "2026-05-23T13:30:07.003396669Z",
+        "exit_code": 0,
+        "err_lines_last_100": 59,
+        "err_samples": [
+          "✗ Auto-updatefailed · Try claude doctor or npm i -g @anthropic-ai/claude-",
+          "…           ✗Auto-update failed · Try claude doctor or npm i -g @anthropi",
+          "✗ Auto-updatefailed · Try claude doctor or npm i -g @anthropic-ai/claude-",
+          "…           ✗Auto-update failed · Try claude doctor or npm i -g @anthropi",
+          "✗ Auto-updatefailed · Try claude doctor or npm i -g @anthropic-ai/claude-"
+        ]
+      },
+      {
+        "id": "188d7b146c59",
+        "name": "orchard-viper-forum",
+        "image": "sha256:a6bdb2944f2df52d6bb31ddb0b6bea339ab03f54e0276d0fb070ba81ef4418cd",
+        "state": "running",
+        "health": "none",
+        "restart_count": 0,
+        "started_at": "2026-05-23T13:40:31.442232268Z",
+        "exit_code": 0,
+        "err_lines_last_100": 27,
+        "err_samples": [
+          "✗ Auto-updatefailed · Try claude doctor or npm i -g @anthropic-ai/claude-",
+          "…           ✗Auto-update failed · Try claude doctor or npm i -g @anthropi",
+          "✗ Auto-updatefailed · Try claude doctor or npm i -g @anthropic-ai/claude-",
+          "…           ✗Auto-update failed · Try claude doctor or npm i -g @anthropi",
+          "✗ Auto-updatefailed · Try claude doctor or npm i -g @anthropic-ai/claude-"
+        ]
+      },
+      {
+        "id": "909d79fadab2",
+        "name": "reddit-engager",
+        "image": "sha256:a6bdb2944f2df52d6bb31ddb0b6bea339ab03f54e0276d0fb070ba81ef4418cd",
+        "state": "running",
+        "health": "none",
+        "restart_count": 0,
+        "started_at": "2026-05-22T23:02:51.770556468Z",
+        "exit_code": 0,
+        "err_lines_last_100": 0,
+        "err_samples": []
+      },
+      {
+        "id": "7e818cb95235",
+        "name": "cloud-chaser-mriiot-023",
+        "image": "sha256:f8a512efea8c5f573306d1c668322d706cc20d4d5b1f349cb674d72c1a112a3e",
+        "state": "running",
+        "health": "none",
+        "restart_count": 0,
+        "started_at": "2026-05-22T22:53:07.044921399Z",
+        "exit_code": 0,
+        "err_lines_last_100": 0,
+        "err_samples": []
+      }
+    ]
+  },
+  "overall_health": "green",
+  "summary": "all 4 containers running; disks 60%; mem 52%; load 0.38"
+}
