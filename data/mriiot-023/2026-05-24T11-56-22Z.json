@@ -1,0 +1,108 @@
+{
+  "ts": "2026-05-24T11:56:22Z",
+  "hostname": "mriiot-023",
+  "kernel_host": "mriiot-023",
+  "uptime_s": 293,
+  "load": {
+    "1m": 8.98,
+    "5m": 3.77,
+    "15m": 1.46
+  },
+  "cpu": {
+    "ncores": 2,
+    "pct": 29
+  },
+  "mem": {
+    "total_mb": 3968,
+    "used_mb": 2397,
+    "pct": 60.4
+  },
+  "disks": [
+    {
+      "mount": "/etc/hosts",
+      "size_mb": 28046,
+      "used_mb": 16843,
+      "pct": 60
+    }
+  ],
+  "kernel_errors_last_hour": [],
+  "docker": {
+    "available": true,
+    "containers": [
+      {
+        "id": "72422d20da8a",
+        "name": "lms-support-worker-1",
+        "image": "sha256:f8a512efea8c5f573306d1c668322d706cc20d4d5b1f349cb674d72c1a112a3e",
+        "state": "running",
+        "health": "none",
+        "restart_count": 0,
+        "started_at": "2026-05-24T11:55:11.399421924Z",
+        "exit_code": 0,
+        "err_lines_last_100": 0,
+        "err_samples": []
+      },
+      {
+        "id": "85eb4d090d8e",
+        "name": "hr-worker-1",
+        "image": "sha256:f8a512efea8c5f573306d1c668322d706cc20d4d5b1f349cb674d72c1a112a3e",
+        "state": "running",
+        "health": "none",
+        "restart_count": 0,
+        "started_at": "2026-05-24T11:55:11.399999231Z",
+        "exit_code": 0,
+        "err_lines_last_100": 0,
+        "err_samples": []
+      },
+      {
+        "id": "f19aebdeab2e",
+        "name": "orchard-viper-conductor",
+        "image": "sha256:f8a512efea8c5f573306d1c668322d706cc20d4d5b1f349cb674d72c1a112a3e",
+        "state": "running",
+        "health": "none",
+        "restart_count": 0,
+        "started_at": "2026-05-24T11:55:11.397938886Z",
+        "exit_code": 0,
+        "err_lines_last_100": 0,
+        "err_samples": []
+      },
+      {
+        "id": "188d7b146c59",
+        "name": "orchard-viper-forum",
+        "image": "sha256:a6bdb2944f2df52d6bb31ddb0b6bea339ab03f54e0276d0fb070ba81ef4418cd",
+        "state": "running",
+        "health": "none",
+        "restart_count": 0,
+        "started_at": "2026-05-24T11:55:11.404485548Z",
+        "exit_code": 0,
+        "err_lines_last_100": 0,
+        "err_samples": []
+      },
+      {
+        "id": "909d79fadab2",
+        "name": "reddit-engager",
+        "image": "sha256:a6bdb2944f2df52d6bb31ddb0b6bea339ab03f54e0276d0fb070ba81ef4418cd",
+        "state": "running",
+        "health": "none",
+        "restart_count": 0,
+        "started_at": "2026-05-24T11:55:11.404410693Z",
+        "exit_code": 0,
+        "err_lines_last_100": 0,
+        "err_samples": []
+      },
+      {
+        "id": "7e818cb95235",
+        "name": "cloud-chaser-mriiot-023",
+        "image": "sha256:f8a512efea8c5f573306d1c668322d706cc20d4d5b1f349cb674d72c1a112a3e",
+        "state": "running",
+        "health": "none",
+        "restart_count": 0,
+        "started_at": "2026-05-24T11:55:11.396227027Z",
+        "exit_code": 0,
+        "err_lines_last_100": 0,
+        "err_samples": []
+      }
+    ]
+  },
+  "overall_health": "amber",
+  "summary": "1m load 8.98 exceeds 2 cores"
+}
