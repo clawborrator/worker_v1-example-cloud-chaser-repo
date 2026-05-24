@@ -41,6 +41,19 @@ function loadHistory(server) {
     .filter(x => x.snap);
 }
 
+function loadLatest(server) {
+  // Read the freshest TS-named snapshot directly. `latest.json` is a
+  // copy-pointer that can drift if a cycle's git reset wipes it
+  // before commit; reading the real file is always correct.
+  const dir = path.join(DATA_DIR, server);
+  if (!fs.existsSync(dir)) return null;
+  const newest = fs.readdirSync(dir)
+    .filter(f => f.endsWith('.json') && f !== 'latest.json')
+    .sort()
+    .pop();
+  return newest ? safeRead(path.join(dir, newest)) : null;
+}
+
 function tierColor(t) {
   return { green: '#3a9a4a', amber: '#c4881e', red: '#c4392e' }[t] || '#888';
 }
@@ -287,7 +300,7 @@ function main() {
   const servers = listServers();
   const rows = [];
   for (const server of servers) {
-    const latest = safeRead(path.join(DATA_DIR, server, 'latest.json'));
+    const latest = loadLatest(server);
     const history = loadHistory(server);
     if (!latest) continue;
 
