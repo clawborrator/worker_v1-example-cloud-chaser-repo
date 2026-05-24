@@ -10,20 +10,20 @@
 <header>
   <p class="crumb"><a href="../index.html">← fleet</a></p>
   <h1>mriiot-023</h1>
-  <p class="generated">regenerated 2026-05-24T19:19:51.135Z</p>
+  <p class="generated">regenerated 2026-05-24T19:33:11.663Z</p>
 </header>
 <main>
 
 <section class="now-card" style="--c:#3a9a4a">
   <div class="now-head">
     <span class="now-badge">green</span>
-    <span class="now-summary">all 5 containers healthy; disk 60%; load 0.41</span>
+    <span class="now-summary">all 7 containers healthy; disk 63%; load 0.46; mem 64%</span>
   </div>
   <div class="now-stats">
-    <div><span class="stat-label">cpu</span><span class="stat-val">8.1%</span><span class="stat-sub">2 cores</span></div>
-    <div><span class="stat-label">mem</span><span class="stat-val">58.3%</span><span class="stat-sub">2315 / 3968 MB</span></div>
-    <div><span class="stat-label">load 1m</span><span class="stat-val">0.41</span><span class="stat-sub">5m 0.28 · 15m 0.11</span></div>
-    <div><span class="stat-label">uptime</span><span class="stat-val">36h</span><span class="stat-sub">kernel <code>mriiot-023</code></span></div>
+    <div><span class="stat-label">cpu</span><span class="stat-val">18.6%</span><span class="stat-sub">2 cores</span></div>
+    <div><span class="stat-label">mem</span><span class="stat-val">64.3%</span><span class="stat-sub">2550 / 3968 MB</span></div>
+    <div><span class="stat-label">load 1m</span><span class="stat-val">0.46</span><span class="stat-sub">5m 0.26 · 15m 0.1</span></div>
+    <div><span class="stat-label">uptime</span><span class="stat-val">7h</span><span class="stat-sub">kernel <code>mriiot-023</code></span></div>
   </div>
 </section>
 
@@ -37,7 +37,7 @@
   <div class="table-wrap"><table>
     <thead><tr><th>mount</th><th>size MB</th><th>used MB</th><th>%</th></tr></thead>
     <tbody>
-      <tr><td><code>/etc/hosts</code></td><td>28046</td><td>16982</td><td>60%</td></tr>
+      <tr><td><code>/etc/hosts</code></td><td>28046</td><td>17792</td><td>63%</td></tr>
     </tbody>
   </table></div>
 </section>
@@ -47,29 +47,28 @@
   <div class="table-wrap"><table>
     <thead><tr><th>name</th><th>image</th><th>state</th><th>health</th><th>restarts</th><th>err lines (last 100)</th></tr></thead>
     <tbody>
-      <tr><td><code>hr-worker-1</code></td><td title="sha256:f8a512efea8c5f573306d1c668322d706cc20d4d5b1f349cb674d72c1a112a3e">sha256:f8a512efea8c5f573…</td><td>running</td><td>none</td><td>0</td><td>4</td></tr>
-      <tr class="err-samples"><td colspan="6"><details><summary>4 error-like lines · showing last 4</summary><pre>✗Auto-updatefailed·Tryclaudedoctorornpmi-g@anthropic-ai/claude-c…
-⠂ Review CLAUDE.md and await dispatches-Icanspawnsiblingworkersforparalleltasksusingspawn-worker────────────────────────────────────────────────────────────────────────────────❯  ────────────────────────────────────────────────────────────────────────────────⏵⏵ bypass permissions on (shift+tab to cycle) ·esc to interrupt✗ Auto-updatefailed · Try claud dctor r npm i -g @anthropic-ai/claud-c
-✗Auto-updatefailed·Tryclaudedoctorornpmi-g@anthropic-ai/claude-c…
-✗Auto-updatefailed·Tryclaudedoctorornpmi-g@anthropic-ai/claude-c…</pre></details></td></tr>
-      <tr><td><code>orchard-viper-conductor</code></td><td title="sha256:f8a512efea8c5f573306d1c668322d706cc20d4d5b1f349cb674d72c1a112a3e">sha256:f8a512efea8c5f573…</td><td>running</td><td>none</td><td>0</td><td>71</td></tr>
-      <tr class="err-samples"><td colspan="6"><details><summary>71 error-like lines · showing last 5</summary><pre>✗ Auto-updatefailed · Try claude doctor or npm i -g @anthropic-ai/claude-
+      <tr><td><code>job-tracking-worker-1</code></td><td title="sha256:9dcbaa92f8ae530e28b8205bc3e342b488851f7ce9278821ed461fe79c8b993f">sha256:9dcbaa92f8ae530e2…</td><td>running</td><td>none</td><td>0</td><td>0</td></tr>
+      <tr><td><code>hr-worker-1</code></td><td title="sha256:9dcbaa92f8ae530e28b8205bc3e342b488851f7ce9278821ed461fe79c8b993f">sha256:9dcbaa92f8ae530e2…</td><td>running</td><td>none</td><td>0</td><td>0</td></tr>
+      <tr><td><code>lms-support-worker-1</code></td><td title="sha256:f8a512efea8c5f573306d1c668322d706cc20d4d5b1f349cb674d72c1a112a3e">sha256:f8a512efea8c5f573…</td><td>running</td><td>none</td><td>0</td><td>8</td></tr>
+      <tr class="err-samples"><td colspan="6"><details><summary>8 error-like lines · showing last 5</summary><pre>✗ Auto-updatefailed · Try claude doctor or npm i -g @anthropic-ai/claude-
 …           ✗Auto-update failed · Try claude doctor or npm i -g @anthropi
 ✗ Auto-updatefailed · Try claude doctor or npm i -g @anthropic-ai/claude-
 …           ✗Auto-update failed · Try claude doctor or npm i -g @anthropi
 ✗ Auto-updatefailed · Try claude doctor or npm i -g @anthropic-ai/claude-</pre></details></td></tr>
-      <tr><td><code>orchard-viper-forum</code></td><td title="sha256:a6bdb2944f2df52d6bb31ddb0b6bea339ab03f54e0276d0fb070ba81ef4418cd">sha256:a6bdb2944f2df52d6…</td><td>running</td><td>none</td><td>0</td><td>38</td></tr>
-      <tr class="err-samples"><td colspan="6"><details><summary>38 error-like lines · showing last 5</summary><pre>✗ Auto-updatefailed · Try claude doctor or npm i -g @anthropic-ai/claude-
+      <tr><td><code>orchard-viper-conductor</code></td><td title="sha256:f8a512efea8c5f573306d1c668322d706cc20d4d5b1f349cb674d72c1a112a3e">sha256:f8a512efea8c5f573…</td><td>running</td><td>none</td><td>0</td><td>27</td></tr>
+      <tr class="err-samples"><td colspan="6"><details><summary>27 error-like lines · showing last 5</summary><pre>✗ Auto-updatefailed · Try claude doctor or npm i -g @anthropic-ai/claude-
 …           ✗Auto-update failed · Try claude doctor or npm i -g @anthropi
 ✗ Auto-updatefailed · Try claude doctor or npm i -g @anthropic-ai/claude-
 …           ✗Auto-update failed · Try claude doctor or npm i -g @anthropi
 ✗ Auto-updatefailed · Try claude doctor or npm i -g @anthropic-ai/claude-</pre></details></td></tr>
-      <tr><td><code>reddit-engager</code></td><td title="sha256:a6bdb2944f2df52d6bb31ddb0b6bea339ab03f54e0276d0fb070ba81ef4418cd">sha256:a6bdb2944f2df52d6…</td><td>running</td><td>none</td><td>0</td><td>5</td></tr>
-      <tr class="err-samples"><td colspan="6"><details><summary>5 error-like lines · showing last 5</summary><pre>✗Auto-updatefailed·Tryclaudedoctor ornpmi-g@anthropic-ai/claude-c…
-✳ Bootstrap cron and run warmup cycle✻Baked for 4m 35s────────────────────────────────────────────────────────────────────────────────❯ show me the last few audit logs  ⏵⏵ bypass permissions on (shift+tab to cycle) · ← for agents  ✗ Auto-update failed · Try claude doctor or npm i -g @anthropic-ai/claude-c……           ✗Auto-update failed · Try claude doctor or npm i -g @anthropi
+      <tr><td><code>orchard-viper-forum</code></td><td title="sha256:a6bdb2944f2df52d6bb31ddb0b6bea339ab03f54e0276d0fb070ba81ef4418cd">sha256:a6bdb2944f2df52d6…</td><td>running</td><td>none</td><td>0</td><td>27</td></tr>
+      <tr class="err-samples"><td colspan="6"><details><summary>27 error-like lines · showing last 5</summary><pre>✗ Auto-updatefailed · Try claude doctor or npm i -g @anthropic-ai/claude-
+…           ✗Auto-update failed · Try claude doctor or npm i -g @anthropi
 ✗ Auto-updatefailed · Try claude doctor or npm i -g @anthropic-ai/claude-
 …           ✗Auto-update failed · Try claude doctor or npm i -g @anthropi
 ✗ Auto-updatefailed · Try claude doctor or npm i -g @anthropic-ai/claude-</pre></details></td></tr>
+      <tr><td><code>reddit-engager</code></td><td title="sha256:a6bdb2944f2df52d6bb31ddb0b6bea339ab03f54e0276d0fb070ba81ef4418cd">sha256:a6bdb2944f2df52d6…</td><td>running</td><td>none</td><td>0</td><td>1</td></tr>
+      <tr class="err-samples"><td colspan="6"><details><summary>1 error-like lines · showing last 1</summary><pre>✗Auto-updatefailed·Tryclaudedoctor ornpmi-g@anthropic-ai/claude-c…</pre></details></td></tr>
       <tr><td><code>cloud-chaser-mriiot-023</code></td><td title="sha256:f8a512efea8c5f573306d1c668322d706cc20d4d5b1f349cb674d72c1a112a3e">sha256:f8a512efea8c5f573…</td><td>running</td><td>none</td><td>0</td><td>0</td></tr>
     </tbody>
   </table></div>
