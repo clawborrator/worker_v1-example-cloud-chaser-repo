@@ -1,0 +1,253 @@
+{
+  "ts": "2026-05-24T11:55:57Z",
+  "hostname": "mriiot-022",
+  "kernel_host": "mriiot-022",
+  "uptime_s": 288,
+  "load": {
+    "1m": 4.9,
+    "5m": 3.28,
+    "15m": 1.39
+  },
+  "cpu": {
+    "ncores": 4,
+    "pct": 13.1
+  },
+  "mem": {
+    "total_mb": 3967,
+    "used_mb": 2053,
+    "pct": 51.8
+  },
+  "disks": [
+    {
+      "mount": "/etc/hosts",
+      "size_mb": 28046,
+      "used_mb": 18055,
+      "pct": 64
+    }
+  ],
+  "kernel_errors_last_hour": [],
+  "docker": {
+    "available": true,
+    "containers": [
+      {
+        "id": "f15c9abfea15",
+        "name": "royalmaster-staging-customer-portal-1",
+        "image": "sha256:5dcbb3bb5405c76842d420cfe56ba7e5e022b7516cdb6bd0582f3c1675beef08",
+        "state": "running",
+        "health": "healthy",
+        "restart_count": 0,
+        "started_at": "2026-05-24T11:53:55.954256041Z",
+        "exit_code": 0,
+        "err_lines_last_100": 2,
+        "err_samples": [
+          "2026-05-22T22:54:14.768503Z  INFO static_web_server::info: log level: error",
+          "2026-05-24T11:54:00.367179Z  INFO static_web_server::info: log level: error"
+        ]
+      },
+      {
+        "id": "f81ae33bd91d",
+        "name": "royalmaster-staging-technician-portal-1",
+        "image": "sha256:e65427d8e1aeede8115ddfbf794cf92377af52cc80436503259c4c81705ed814",
+        "state": "running",
+        "health": "healthy",
+        "restart_count": 0,
+        "started_at": "2026-05-24T11:53:55.953352462Z",
+        "exit_code": 0,
+        "err_lines_last_100": 2,
+        "err_samples": [
+          "2026-05-22T22:54:14.768492Z  INFO static_web_server::info: log level: error",
+          "2026-05-24T11:54:00.367166Z  INFO static_web_server::info: log level: error"
+        ]
+      },
+      {
+        "id": "997b576c6d96",
+        "name": "royalmaster-staging-historical-entry-frontend-1",
+        "image": "sha256:a717f969ed599d55133eeb61235d5946052b3574a7dc4c9c5354de119506c6aa",
+        "state": "running",
+        "health": "healthy",
+        "restart_count": 0,
+        "started_at": "2026-05-24T11:53:55.931098194Z",
+        "exit_code": 0,
+        "err_lines_last_100": 2,
+        "err_samples": [
+          "2026-05-22T22:54:14.703081Z  INFO static_web_server::info: log level: error",
+          "2026-05-24T11:54:00.586680Z  INFO static_web_server::info: log level: error"
+        ]
+      },
+      {
+        "id": "1c3dd493efb1",
+        "name": "royalmaster-staging-rag-retrieval-1",
+        "image": "sha256:55b3589d07a4a8526a35878e8e5c6e94003e264b338b370a1881453f6ab9c65b",
+        "state": "running",
+        "health": "none",
+        "restart_count": 0,
+        "started_at": "2026-05-24T11:53:55.654987519Z",
+        "exit_code": 0,
+        "err_lines_last_100": 0,
+        "err_samples": []
+      },
+      {
+        "id": "d42d2b963b9a",
+        "name": "royalmaster-staging-portal-backend-1",
+        "image": "sha256:9e065ecd168638b15c5729d750508b256a721185de263ab1c6664c9af1b48822",
+        "state": "running",
+        "health": "none",
+        "restart_count": 0,
+        "started_at": "2026-05-24T11:53:55.651615831Z",
+        "exit_code": 0,
+        "err_lines_last_100": 10,
+        "err_samples": [
+          "2026-05-22 19:37:43,273 WARNING app.main: portal-backend: failed to sync slice-6 payload indexes: All connection attempts failed",
+          "/usr/local/lib/python3.13/site-packages/qdrant_client/async_qdrant_remote.py:231: UserWarning: Failed to obtain server version. Unable to check client-server compatibility. Set check_compatibility=False to skip version check.",
+          "2026-05-22 22:54:43,762 WARNING app.main: portal-backend: failed to sync slice-6 payload indexes: All connection attempts failed",
+          "/usr/local/lib/python3.13/site-packages/qdrant_client/async_qdrant_remote.py:231: UserWarning: Failed to obtain server version. Unable to check client-server compatibility. Set check_compatibility=False to skip version check.",
+          "2026-05-24 11:54:41,049 WARNING app.main: portal-backend: failed to sync slice-6 payload indexes: All connection attempts failed"
+        ]
+      },
+      {
+        "id": "f28b0f330ee3",
+        "name": "royalmaster-staging-rag-ingestion-worker-1",
+        "image": "sha256:35ea232e98443ee594e9aae909d130fb1aca0c078fab7ed3c30b934eb9df786a",
+        "state": "running",
+        "health": "none",
+        "restart_count": 0,
+        "started_at": "2026-05-24T11:53:55.653024029Z",
+        "exit_code": 0,
+        "err_lines_last_100": 5,
+        "err_samples": [
+          "raise error",
+          "raise ConnectionError(SERVER_CLOSED_CONNECTION_ERROR)",
+          "redis.exceptions.ConnectionError: Connection closed by server.",
+          "/usr/local/lib/python3.13/site-packages/qdrant_client/async_qdrant_remote.py:231: UserWarning: Failed to obtain server version. Unable to check client-server compatibility. Set check_compatibility=False to skip version check.",
+          "/usr/local/lib/python3.13/site-packages/qdrant_client/async_qdrant_remote.py:231: UserWarning: Failed to obtain server version. Unable to check client-server compatibility. Set check_compatibility=False to skip version check."
+        ]
+      },
+      {
+        "id": "75f025e60d3d",
+        "name": "royalmaster-staging-rag-ingestion-api-1",
+        "image": "sha256:35ea232e98443ee594e9aae909d130fb1aca0c078fab7ed3c30b934eb9df786a",
+        "state": "running",
+        "health": "none",
+        "restart_count": 0,
+        "started_at": "2026-05-24T11:53:55.652196196Z",
+        "exit_code": 0,
+        "err_lines_last_100": 0,
+        "err_samples": []
+      },
+      {
+        "id": "ff322bf6e16a",
+        "name": "royalmaster-staging-rag-generation-1",
+        "image": "sha256:2645e55e3adff1c557f9928330d2ef18e22a165d77731df3deb5e6ad0f4a807c",
+        "state": "running",
+        "health": "none",
+        "restart_count": 0,
+        "started_at": "2026-05-24T11:53:55.653975671Z",
+        "exit_code": 0,
+        "err_lines_last_100": 0,
+        "err_samples": []
+      },
+      {
+        "id": "91c45c8014b4",
+        "name": "royalmaster-staging-historical-entry-backend-1",
+        "image": "sha256:6e9a9c33390b97b1342c87ed31553dbb8edff00519ffa12b1dc3d936fe34a5d9",
+        "state": "running",
+        "health": "none",
+        "restart_count": 0,
+        "started_at": "2026-05-24T11:53:55.655636704Z",
+        "exit_code": 0,
+        "err_lines_last_100": 0,
+        "err_samples": []
+      },
+      {
+        "id": "dcdd1506f669",
+        "name": "royalmaster-staging-postgres-1",
+        "image": "sha256:16bc17c64a573ef34162af9298258d1aec548232985b33ed7b1eac33ba35c229",
+        "state": "running",
+        "health": "healthy",
+        "restart_count": 0,
+        "started_at": "2026-05-24T11:53:55.934769947Z",
+        "exit_code": 0,
+        "err_lines_last_100": 8,
+        "err_samples": [
+          "2026-05-22 19:34:05.684 UTC [59] FATAL:  terminating connection due to administrator command",
+          "2026-05-22 19:36:19.073 UTC [75] FATAL:  terminating connection due to administrator command",
+          "2026-05-22 19:36:19.079 UTC [67] FATAL:  terminating connection due to administrator command",
+          "2026-05-22 22:53:02.175 UTC [60] FATAL:  terminating connection due to administrator command",
+          "2026-05-22 22:53:02.195 UTC [68] FATAL:  terminating connection due to administrator command"
+        ]
+      },
+      {
+        "id": "0c60d9bdef00",
+        "name": "royalmaster-staging-mongo-1",
+        "image": "sha256:4b5bf3c2bb7516164f6dcb44acce4fdcb428abfe5771a1128304a0f34ab9ff7c",
+        "state": "running",
+        "health": "healthy",
+        "restart_count": 0,
+        "started_at": "2026-05-24T11:53:55.932026025Z",
+        "exit_code": 0,
+        "err_lines_last_100": 0,
+        "err_samples": []
+      },
+      {
+        "id": "8cc1101cb389",
+        "name": "cloud-chaser-mriiot-022",
+        "image": "sha256:f8a512efea8c5f573306d1c668322d706cc20d4d5b1f349cb674d72c1a112a3e",
+        "state": "running",
+        "health": "none",
+        "restart_count": 0,
+        "started_at": "2026-05-24T11:53:55.679941844Z",
+        "exit_code": 0,
+        "err_lines_last_100": 0,
+        "err_samples": []
+      },
+      {
+        "id": "f8145e814a49",
+        "name": "royalmaster-staging-qdrant-1",
+        "image": "sha256:b3063c673f3973877c038eeecc392bad5011f072ee7892b56c9a8e204a3bdea9",
+        "state": "running",
+        "health": "healthy",
+        "restart_count": 0,
+        "started_at": "2026-05-24T11:53:55.93327148Z",
+        "exit_code": 0,
+        "err_lines_last_100": 0,
+        "err_samples": []
+      },
+      {
+        "id": "74d9f05bae5a",
+        "name": "royalmaster-staging-redis-1",
+        "image": "sha256:5d5154123426693540ea6c1d9e638eae2bf2024879c839db6fcfdd7717e817c7",
+        "state": "running",
+        "health": "healthy",
+        "restart_count": 0,
+        "started_at": "2026-05-24T11:53:55.934037206Z",
+        "exit_code": 0,
+        "err_lines_last_100": 5,
+        "err_samples": [
+          "9:M 22 May 2026 22:54:17.480 # <redisgears_2> could not initialize RedisAI_InitError",
+          "9:M 22 May 2026 22:54:17.481 * <redisgears_2> Failed loading RedisAI API.",
+          "10:C 24 May 2026 11:54:04.985 # WARNING Memory overcommit must be enabled! Without it, a background save or replication may fail under low memory condition. Being disabled, it can also cause failures without low memory condition, see https://github.com/jemalloc/jemalloc/issues/1328. To fix this issue add 'vm.overcommit_memory = 1' to /etc/sysctl.conf and then reboot or run the command 'sysctl vm.overcommit_memory=1' for this to take effect.",
+          "10:M 24 May 2026 11:54:08.463 # <redisgears_2> could not initialize RedisAI_InitError",
+          "10:M 24 May 2026 11:54:08.463 * <redisgears_2> Failed loading RedisAI API."
+        ]
+      },
+      {
+        "id": "4e2742f8495b",
+        "name": "royalmaster-staging-dozzle-1",
+        "image": "sha256:1cc972250626553009ddacbdf1f5725b681cdcbabe551fec69cd728882ffbc58",
+        "state": "running",
+        "health": "none",
+        "restart_count": 0,
+        "started_at": "2026-05-24T11:53:55.481210754Z",
+        "exit_code": 0,
+        "err_lines_last_100": 3,
+        "err_samples": [
+          "{\"level\":\"error\",\"version\":\"v10.5.3\",\"host\":\"mriiot-022\",\"time\":\"2026-05-13T15:44:44Z\",\"message\":\"unexpected error while listening to docker events\"}",
+          "{\"level\":\"error\",\"version\":\"v10.5.3\",\"error\":\"context deadline exceeded\",\"time\":\"2026-05-19T12:22:12Z\",\"message\":\"failed to shut down\"}",
+          "{\"level\":\"error\",\"version\":\"v10.5.3\",\"host\":\"mriiot-022\",\"time\":\"2026-05-19T18:25:01Z\",\"message\":\"unexpected error while listening to docker events\"}"
+        ]
+      }
+    ]
+  },
+  "overall_health": "amber",
+  "summary": "load 4.9 on 4 cores (1m average)"
+}
