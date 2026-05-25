@@ -1,0 +1,149 @@
+{
+  "ts": "2026-05-25T17:15:33Z",
+  "hostname": "mriiot-023",
+  "kernel_host": "mriiot-023",
+  "uptime_s": 105844,
+  "load": {
+    "1m": 0.35,
+    "5m": 0.24,
+    "15m": 0.1
+  },
+  "cpu": {
+    "ncores": 2,
+    "pct": 23.5
+  },
+  "mem": {
+    "total_mb": 3968,
+    "used_mb": 2615,
+    "pct": 65.9
+  },
+  "disks": [
+    {
+      "mount": "/etc/hosts",
+      "size_mb": 28046,
+      "used_mb": 16623,
+      "pct": 59
+    }
+  ],
+  "kernel_errors_last_hour": [],
+  "docker": {
+    "available": true,
+    "containers": [
+      {
+        "id": "ce07920406bb",
+        "name": "pipeline-worker-1",
+        "image": "sha256:9dcbaa92f8ae530e28b8205bc3e342b488851f7ce9278821ed461fe79c8b993f",
+        "state": "running",
+        "health": "none",
+        "restart_count": 0,
+        "started_at": "2026-05-25T13:30:48.172508849Z",
+        "exit_code": 0,
+        "err_lines_last_100": 0,
+        "err_samples": []
+      },
+      {
+        "id": "d35530324e2c",
+        "name": "job-tracking-worker-1",
+        "image": "sha256:9dcbaa92f8ae530e28b8205bc3e342b488851f7ce9278821ed461fe79c8b993f",
+        "state": "running",
+        "health": "none",
+        "restart_count": 0,
+        "started_at": "2026-05-25T13:17:36.967593627Z",
+        "exit_code": 0,
+        "err_lines_last_100": 4,
+        "err_samples": [
+          "mongodb ·✘ failed",
+          "※Runclaude--debugtoseeerrorlogs",
+          "clawborrator ·  connected · 12 tools❯ mongodb ·  failed",
+          "ogodb MCP ServerStatus:✘ failedCommand:          npxArgs:             -y @mongob-js/mongodb-mcp-serverConfig location:  /workspace/.mcp.json❯ 1. Reconnect  2. Disable"
+        ]
+      },
+      {
+        "id": "1cdd6fc013d3",
+        "name": "lms-support-worker-1",
+        "image": "sha256:9dcbaa92f8ae530e28b8205bc3e342b488851f7ce9278821ed461fe79c8b993f",
+        "state": "running",
+        "health": "none",
+        "restart_count": 0,
+        "started_at": "2026-05-25T13:17:20.929688261Z",
+        "exit_code": 0,
+        "err_lines_last_100": 0,
+        "err_samples": []
+      },
+      {
+        "id": "e5b1a85fd180",
+        "name": "hr-worker-1",
+        "image": "sha256:9dcbaa92f8ae530e28b8205bc3e342b488851f7ce9278821ed461fe79c8b993f",
+        "state": "running",
+        "health": "none",
+        "restart_count": 0,
+        "started_at": "2026-05-25T13:17:04.330174888Z",
+        "exit_code": 0,
+        "err_lines_last_100": 0,
+        "err_samples": []
+      },
+      {
+        "id": "f19aebdeab2e",
+        "name": "orchard-viper-conductor",
+        "image": "sha256:f8a512efea8c5f573306d1c668322d706cc20d4d5b1f349cb674d72c1a112a3e",
+        "state": "running",
+        "health": "none",
+        "restart_count": 0,
+        "started_at": "2026-05-24T11:55:11.397938886Z",
+        "exit_code": 0,
+        "err_lines_last_100": 50,
+        "err_samples": [
+          "✗ Auto-updatefailed · Try claude doctor or npm i -g @anthropic-ai/claude-",
+          "…           ✗Auto-update failed · Try claude doctor or npm i -g @anthropi",
+          "✗ Auto-updatefailed · Try claude doctor or npm i -g @anthropic-ai/claude-",
+          "…           ✗Auto-update failed · Try claude doctor or npm i -g @anthropi",
+          "✗ Auto-updatefailed · Try claude doctor or npm i -g @anthropic-ai/claude-"
+        ]
+      },
+      {
+        "id": "188d7b146c59",
+        "name": "orchard-viper-forum",
+        "image": "sha256:a6bdb2944f2df52d6bb31ddb0b6bea339ab03f54e0276d0fb070ba81ef4418cd",
+        "state": "running",
+        "health": "none",
+        "restart_count": 0,
+        "started_at": "2026-05-24T11:55:11.404485548Z",
+        "exit_code": 0,
+        "err_lines_last_100": 100,
+        "err_samples": [
+          "✗ Auto-updatefailed · Try claude doctor or npm i -g @anthropic-ai/claude-",
+          "…           ✗Auto-update failed · Try claude doctor or npm i -g @anthropi",
+          "✗ Auto-updatefailed · Try claude doctor or npm i -g @anthropic-ai/claude-",
+          "…           ✗Auto-update failed · Try claude doctor or npm i -g @anthropi",
+          "✗ Auto-updatefailed · Try claude doctor or npm i -g @anthropic-ai/claude-"
+        ]
+      },
+      {
+        "id": "909d79fadab2",
+        "name": "reddit-engager",
+        "image": "sha256:a6bdb2944f2df52d6bb31ddb0b6bea339ab03f54e0276d0fb070ba81ef4418cd",
+        "state": "running",
+        "health": "none",
+        "restart_count": 0,
+        "started_at": "2026-05-24T11:55:11.404410693Z",
+        "exit_code": 0,
+        "err_lines_last_100": 0,
+        "err_samples": []
+      },
+      {
+        "id": "7e818cb95235",
+        "name": "cloud-chaser-mriiot-023",
+        "image": "sha256:f8a512efea8c5f573306d1c668322d706cc20d4d5b1f349cb674d72c1a112a3e",
+        "state": "running",
+        "health": "none",
+        "restart_count": 0,
+        "started_at": "2026-05-24T11:55:11.396227027Z",
+        "exit_code": 0,
+        "err_lines_last_100": 0,
+        "err_samples": []
+      }
+    ]
+  },
+  "overall_health": "green",
+  "summary": "all 8 containers healthy; disk 59%; load 0.35; mem 66%"
+}
