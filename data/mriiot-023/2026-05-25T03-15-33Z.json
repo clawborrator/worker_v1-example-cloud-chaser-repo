@@ -1,0 +1,155 @@
+{
+  "ts": "2026-05-25T03:15:33Z",
+  "hostname": "mriiot-023",
+  "kernel_host": "mriiot-023",
+  "uptime_s": 55445,
+  "load": {
+    "1m": 0.51,
+    "5m": 0.26,
+    "15m": 0.1
+  },
+  "cpu": {
+    "ncores": 2,
+    "pct": 70.7
+  },
+  "mem": {
+    "total_mb": 3968,
+    "used_mb": 2739,
+    "pct": 69
+  },
+  "disks": [
+    {
+      "mount": "/etc/hosts",
+      "size_mb": 28046,
+      "used_mb": 18117,
+      "pct": 64
+    }
+  ],
+  "kernel_errors_last_hour": [],
+  "docker": {
+    "available": true,
+    "containers": [
+      {
+        "id": "dede0ffb7745",
+        "name": "pipeline-worker-1",
+        "image": "sha256:9dcbaa92f8ae530e28b8205bc3e342b488851f7ce9278821ed461fe79c8b993f",
+        "state": "running",
+        "health": "none",
+        "restart_count": 0,
+        "started_at": "2026-05-25T02:03:52.643430979Z",
+        "exit_code": 0,
+        "err_lines_last_100": 0,
+        "err_samples": []
+      },
+      {
+        "id": "c5eaf679ceef",
+        "name": "job-tracking-worker-1",
+        "image": "sha256:9dcbaa92f8ae530e28b8205bc3e342b488851f7ce9278821ed461fe79c8b993f",
+        "state": "running",
+        "health": "none",
+        "restart_count": 0,
+        "started_at": "2026-05-24T16:05:01.412640637Z",
+        "exit_code": 0,
+        "err_lines_last_100": 0,
+        "err_samples": []
+      },
+      {
+        "id": "10c405e77e84",
+        "name": "hr-worker-1",
+        "image": "sha256:9dcbaa92f8ae530e28b8205bc3e342b488851f7ce9278821ed461fe79c8b993f",
+        "state": "running",
+        "health": "none",
+        "restart_count": 0,
+        "started_at": "2026-05-24T15:51:14.699627175Z",
+        "exit_code": 0,
+        "err_lines_last_100": 0,
+        "err_samples": []
+      },
+      {
+        "id": "72422d20da8a",
+        "name": "lms-support-worker-1",
+        "image": "sha256:f8a512efea8c5f573306d1c668322d706cc20d4d5b1f349cb674d72c1a112a3e",
+        "state": "running",
+        "health": "none",
+        "restart_count": 0,
+        "started_at": "2026-05-24T11:55:11.399421924Z",
+        "exit_code": 0,
+        "err_lines_last_100": 5,
+        "err_samples": [
+          "✗Auto-updatefailed·Tryclaudedoctor ornpmi-g@anthropic-ai/claude-c…",
+          "✳ Review and embody CLAUDE.md role definition✻Churned for 8s────────────────────────────────────────────────────────────────────────────────❯    ⏵⏵ bypass permissions on (shift+tab to cycle)  ✗ Auto-update failed · Try claude doctor or npm i -g @anthropic-ai/claude-c……           ✗Auto-update failed · Try claude doctor or npm i -g @anthropi",
+          "✗ Auto-updatefailed · Try claude doctor or npm i -g @anthropic-ai/claude-",
+          "…           ✗Auto-update failed · Try claude doctor or npm i -g @anthropi",
+          "✗ Auto-updatefailed · Try claude doctor or npm i -g @anthropic-ai/claude-"
+        ]
+      },
+      {
+        "id": "f19aebdeab2e",
+        "name": "orchard-viper-conductor",
+        "image": "sha256:f8a512efea8c5f573306d1c668322d706cc20d4d5b1f349cb674d72c1a112a3e",
+        "state": "running",
+        "health": "none",
+        "restart_count": 0,
+        "started_at": "2026-05-24T11:55:11.397938886Z",
+        "exit_code": 0,
+        "err_lines_last_100": 50,
+        "err_samples": [
+          "✗ Auto-updatefailed · Try claude doctor or npm i -g @anthropic-ai/claude-",
+          "…           ✗Auto-update failed · Try claude doctor or npm i -g @anthropi",
+          "✗ Auto-updatefailed · Try claude doctor or npm i -g @anthropic-ai/claude-",
+          "…           ✗Auto-update failed · Try claude doctor or npm i -g @anthropi",
+          "✗ Auto-updatefailed · Try claude doctor or npm i -g @anthropic-ai/claude-"
+        ]
+      },
+      {
+        "id": "188d7b146c59",
+        "name": "orchard-viper-forum",
+        "image": "sha256:a6bdb2944f2df52d6bb31ddb0b6bea339ab03f54e0276d0fb070ba81ef4418cd",
+        "state": "running",
+        "health": "none",
+        "restart_count": 0,
+        "started_at": "2026-05-24T11:55:11.404485548Z",
+        "exit_code": 0,
+        "err_lines_last_100": 59,
+        "err_samples": [
+          "✗ Auto-updatefailed · Try claude doctor or npm i -g @anthropic-ai/claude-",
+          "…           ✗Auto-update failed · Try claude doctor or npm i -g @anthropi",
+          "✗ Auto-updatefailed · Try claude doctor or npm i -g @anthropic-ai/claude-",
+          "…           ✗Auto-update failed · Try claude doctor or npm i -g @anthropi",
+          "✗ Auto-updatefailed · Try claude doctor or npm i -g @anthropic-ai/claude-"
+        ]
+      },
+      {
+        "id": "909d79fadab2",
+        "name": "reddit-engager",
+        "image": "sha256:a6bdb2944f2df52d6bb31ddb0b6bea339ab03f54e0276d0fb070ba81ef4418cd",
+        "state": "running",
+        "health": "none",
+        "restart_count": 0,
+        "started_at": "2026-05-24T11:55:11.404410693Z",
+        "exit_code": 0,
+        "err_lines_last_100": 2,
+        "err_samples": [
+          "✽Beboppin'… (4m 37s · ↓3.6k tokens · thought for 4s)  ⎿  Tip: Use /btw to ask a quic sidequestion without interrupting Claude's      current work────────────────────────────────────────────────────────────────────────────────❯  ────────────────────────────────────────────────────────────────────────────────  ⏵⏵ bypass permissions on (shift+tab to cycle) · esc to interrupt✗ Auto-update failed · Try claude doctor or npm i -g @anthropic-ai/claude-c…⠐ Bootstrap cron and execute warmup cycle ✻Beboppin'…",
+          "✗Auto-updatefailed·Tryclaudedoctor ornpmi-g@anthropic-ai/claude-c…"
+        ]
+      },
+      {
+        "id": "7e818cb95235",
+        "name": "cloud-chaser-mriiot-023",
+        "image": "sha256:f8a512efea8c5f573306d1c668322d706cc20d4d5b1f349cb674d72c1a112a3e",
+        "state": "running",
+        "health": "none",
+        "restart_count": 0,
+        "started_at": "2026-05-24T11:55:11.396227027Z",
+        "exit_code": 0,
+        "err_lines_last_100": 1,
+        "err_samples": [
+          "✗Auto-updatefailed·Tryclaudedoctor ornpmi-g@anthropic-ai/claude-c…"
+        ]
+      }
+    ]
+  },
+  "overall_health": "green",
+  "summary": "all 8 containers healthy; disk 64%; load 0.51; mem 69%"
+}
