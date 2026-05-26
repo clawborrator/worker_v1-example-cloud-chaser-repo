@@ -1,0 +1,134 @@
+{
+  "ts": "2026-05-26T04:22:02Z",
+  "hostname": "mriiot-023",
+  "kernel_host": "mriiot-023",
+  "uptime_s": 88,
+  "load": {
+    "1m": 15.88,
+    "5m": 5.02,
+    "15m": 1.76
+  },
+  "cpu": {
+    "ncores": 2,
+    "pct": 100
+  },
+  "mem": {
+    "total_mb": 3968,
+    "used_mb": 2880,
+    "pct": 72.6
+  },
+  "disks": [
+    {
+      "mount": "/etc/hosts",
+      "size_mb": 28046,
+      "used_mb": 20576,
+      "pct": 73
+    }
+  ],
+  "kernel_errors_last_hour": [],
+  "docker": {
+    "available": true,
+    "containers": [
+      {
+        "id": "6300df8614df",
+        "name": "cloud-chaser-unnamed",
+        "image": "sha256:ef7d6ad5f857cd70d2e412534aa3a3c7e8f862408121b2355ac0a831d9ebbfe1",
+        "state": "running",
+        "health": "none",
+        "restart_count": 0,
+        "started_at": "2026-05-26T04:20:53.949135569Z",
+        "exit_code": 0,
+        "err_lines_last_100": 0,
+        "err_samples": []
+      },
+      {
+        "id": "c89c6d838e7f",
+        "name": "orchard-viper-forum",
+        "image": "sha256:29712e24c229f3c8f3e6b370e49a0e4f8735ba315872a3e018c4a839cf77bbb9",
+        "state": "running",
+        "health": "none",
+        "restart_count": 0,
+        "started_at": "2026-05-26T04:20:53.978171293Z",
+        "exit_code": 0,
+        "err_lines_last_100": 0,
+        "err_samples": []
+      },
+      {
+        "id": "948a3ec4390b",
+        "name": "orchard-viper-conductor",
+        "image": "sha256:ef7d6ad5f857cd70d2e412534aa3a3c7e8f862408121b2355ac0a831d9ebbfe1",
+        "state": "running",
+        "health": "none",
+        "restart_count": 0,
+        "started_at": "2026-05-26T04:20:53.974399953Z",
+        "exit_code": 0,
+        "err_lines_last_100": 0,
+        "err_samples": []
+      },
+      {
+        "id": "75d7e99cf376",
+        "name": "reddit-engager",
+        "image": "sha256:29712e24c229f3c8f3e6b370e49a0e4f8735ba315872a3e018c4a839cf77bbb9",
+        "state": "running",
+        "health": "none",
+        "restart_count": 0,
+        "started_at": "2026-05-26T04:20:53.973341223Z",
+        "exit_code": 0,
+        "err_lines_last_100": 0,
+        "err_samples": []
+      },
+      {
+        "id": "84a249bed511",
+        "name": "hr-worker-1",
+        "image": "sha256:ef7d6ad5f857cd70d2e412534aa3a3c7e8f862408121b2355ac0a831d9ebbfe1",
+        "state": "running",
+        "health": "none",
+        "restart_count": 0,
+        "started_at": "2026-05-26T04:20:53.923717476Z",
+        "exit_code": 0,
+        "err_lines_last_100": 0,
+        "err_samples": []
+      },
+      {
+        "id": "de743f0c8fe9",
+        "name": "lms-support-worker-1",
+        "image": "sha256:ef7d6ad5f857cd70d2e412534aa3a3c7e8f862408121b2355ac0a831d9ebbfe1",
+        "state": "running",
+        "health": "none",
+        "restart_count": 0,
+        "started_at": "2026-05-26T04:20:53.922766683Z",
+        "exit_code": 0,
+        "err_lines_last_100": 1,
+        "err_samples": [
+          "1MCPserverfailed ·/mcp"
+        ]
+      },
+      {
+        "id": "651de18bde13",
+        "name": "pipeline-worker-1",
+        "image": "sha256:ef7d6ad5f857cd70d2e412534aa3a3c7e8f862408121b2355ac0a831d9ebbfe1",
+        "state": "running",
+        "health": "none",
+        "restart_count": 0,
+        "started_at": "2026-05-26T04:20:53.949747265Z",
+        "exit_code": 0,
+        "err_lines_last_100": 0,
+        "err_samples": []
+      },
+      {
+        "id": "b0e9f3be8022",
+        "name": "job-tracking-worker-1",
+        "image": "sha256:ef7d6ad5f857cd70d2e412534aa3a3c7e8f862408121b2355ac0a831d9ebbfe1",
+        "state": "running",
+        "health": "none",
+        "restart_count": 0,
+        "started_at": "2026-05-26T04:20:53.986983882Z",
+        "exit_code": 0,
+        "err_lines_last_100": 0,
+        "err_samples": []
+      }
+    ]
+  },
+  "overall_health": "amber",
+  "summary": "1m load 15.88 (2 cores); 8 containers running"
+}
