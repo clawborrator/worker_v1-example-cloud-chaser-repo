@@ -1,0 +1,88 @@
+{
+  "ts": "2026-05-26T17:10:35Z",
+  "hostname": "mriiot-021",
+  "kernel_host": "mriiot-021",
+  "uptime_s": 191965,
+  "load": {
+    "1m": 0.03,
+    "5m": 0.02,
+    "15m": 0
+  },
+  "cpu": {
+    "ncores": 4,
+    "pct": 10.1
+  },
+  "mem": {
+    "total_mb": 3967,
+    "used_mb": 1361,
+    "pct": 34.3
+  },
+  "disks": [
+    {
+      "mount": "/etc/hosts",
+      "size_mb": 28046,
+      "used_mb": 11890,
+      "pct": 42
+    }
+  ],
+  "kernel_errors_last_hour": [],
+  "docker": {
+    "available": true,
+    "containers": [
+      {
+        "id": "af4a8fec26dc",
+        "name": "cloud-chaser-mriiot-021",
+        "image": "sha256:f8a512efea8c5f573306d1c668322d706cc20d4d5b1f349cb674d72c1a112a3e",
+        "state": "running",
+        "health": "none",
+        "restart_count": 0,
+        "started_at": "2026-05-24T11:53:41.531386424Z",
+        "exit_code": 0,
+        "err_lines_last_100": 0,
+        "err_samples": []
+      },
+      {
+        "id": "5eaaba57b261",
+        "name": "frontend",
+        "image": "sha256:fae44cad3bab9841cedbf6fddfe69998eb72a5e29fc81e3f8de0c86730cf5434",
+        "state": "running",
+        "health": "healthy",
+        "restart_count": 0,
+        "started_at": "2026-05-24T11:53:41.530403138Z",
+        "exit_code": 0,
+        "err_lines_last_100": 3,
+        "err_samples": [
+          "2026-05-22T19:36:45.962513Z  INFO static_web_server::info: log level: error",
+          "2026-05-22T22:54:32.853346Z  INFO static_web_server::info: log level: error",
+          "2026-05-24T11:53:56.214345Z  INFO static_web_server::info: log level: error"
+        ]
+      },
+      {
+        "id": "0d84f8c70391",
+        "name": "backend",
+        "image": "sha256:94bb6371b3324a7112943a9fc1d789e03722e700ad4cfd586bb94fd903112348",
+        "state": "running",
+        "health": "healthy",
+        "restart_count": 0,
+        "started_at": "2026-05-24T11:53:41.529609357Z",
+        "exit_code": 0,
+        "err_lines_last_100": 0,
+        "err_samples": []
+      },
+      {
+        "id": "4415cead24fb",
+        "name": "dozzle",
+        "image": "sha256:6bdfca41441987648ea2af525f61cdde316df6c433aab6ffdfc64cdd72bfe279",
+        "state": "running",
+        "health": "healthy",
+        "restart_count": 0,
+        "started_at": "2026-05-24T11:53:41.528804656Z",
+        "exit_code": 0,
+        "err_lines_last_100": 0,
+        "err_samples": []
+      }
+    ]
+  },
+  "overall_health": "green",
+  "summary": "all 4 containers healthy; disk 42%; load 0.03; mem 34%"
+}
